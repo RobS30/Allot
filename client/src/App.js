@@ -1,18 +1,44 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
+import axios from "axios";
 import "./App.css";
 
 class App extends Component {
+  componentDidMount() {
+    axios.defaults.headers.common["Authorization"] = localStorage.getItem(
+      "jwtToken"
+    );
+    axios
+      .get("/api/budget")
+      .then(res => {
+        console.log(res);
+      })
+      .catch(error => {
+        if (error.response.status === 401) {
+          this.props.history.push("/login");
+        }
+      });
+  }
+
+  logout = () => {
+    localStorage.removeItem("jwtToken");
+    window.location.reload();
+  };
+
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+      <div class="container">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              allot <small>is here</small>
+              {localStorage.getItem("jwtToken") && (
+                <button class="btn btn-primary" onClick={this.logout}>
+                  Logout
+                </button>
+              )}
+            </h3>
+          </div>          
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
       </div>
     );
   }
