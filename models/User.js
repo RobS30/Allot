@@ -20,18 +20,18 @@ var UserSchema = new Schema({
     type: String,
     unique: true
   },
-  expenses: {
-    type: Array,
+  expenses: [{
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'Expense'
-  },
-  incomes: {
-    type: Array,
+  }],
+  incomes: [{
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'Income'
-  },
-  studentLoans: {
-    type: Array,
+  }],
+  studentLoans: [{
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'StudentLoans'
-  }
+  }]
 });
 
 UserSchema.pre("save", function(next) {
