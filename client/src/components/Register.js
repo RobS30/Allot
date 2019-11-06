@@ -24,42 +24,68 @@ class Create extends Component {
 
     const { name, email, password, college } = this.state;
 
-    axios.post("/api/auth/register", { name, email, password, college }).then(result => {
+    axios.post("/api/register", { name, email, password, college }).then(result => {
       this.props.history.push("/login");
-    });
+    }).catch(err => {
+      console.log(err);
+    })
   };
 
   render() {
-    const { email, password } = this.state;
+    const { name, email, password, college } = this.state;
     return (
-      <div class="container">
-        <form class="form-signin" onSubmit={this.onSubmit}>
-          <h2 class="form-signin-heading">Register</h2>
-          <label for="inputEmail" class="sr-only">
+      <div className="container">
+        <form className="form-signin" onSubmit={this.onSubmit}>
+          <h2 className="form-signin-heading">Register</h2>
+          <label htmlFor="inputName" className="sr-only">
+            Name
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Full Name"
+            name="name"
+            value={name}
+            onChange={this.onChange}
+            required
+          />
+          <label htmlFor="inputEmail" className="sr-only">
             Email address
           </label>
           <input
             type="email"
-            class="form-control"
+            className="form-control"
             placeholder="Email address"
             name="email"
             value={email}
             onChange={this.onChange}
             required
           />
-          <label for="inputPassword" class="sr-only">
+          <label htmlFor="inputPassword" className="sr-only">
             Password
           </label>
           <input
             type="password"
-            class="form-control"
+            className="form-control"
             placeholder="Password"
             name="password"
             value={password}
             onChange={this.onChange}
             required
           />
-          <button class="btn btn-lg btn-primary btn-block" type="submit">
+          <label htmlFor="inputCollege" className="sr-only">
+            College
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="College"
+            name="college"
+            value={college}
+            onChange={this.onChange}
+
+          />
+          <button className="btn btn-lg btn-primary btn-block" type="submit">
             Register
           </button>
         </form>

@@ -2,9 +2,12 @@ const express = require("express");
 const path = require("path");
 const logger = require('morgan');
 const PORT = process.env.PORT || 3001;
+const budget = require('./routes/api/budget');
+const auth = require('./routes/api/auth');
+const mongoose = require('mongoose');
+
 const app = express();
 
-var mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/allotDB', { promiseLibrary: require('bluebird') })
   .then(() =>  console.log('connection succesful'))
@@ -20,11 +23,8 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Define API routes here
-const budget = require('./routes/api/budget');
-const auth = require('./routes/api/auth');
-
-app.use('/api/budget', budget);
-app.use('./routes/api/auth', auth);
+require('./routes/api/budget')(app);
+require('./routes/api/auth')(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

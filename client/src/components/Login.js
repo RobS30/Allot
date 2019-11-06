@@ -24,7 +24,7 @@ class Login extends Component {
     const { email, password } = this.state;
 
     axios
-      .post("/api/auth/login", { email, password })
+      .post("/api/login", { email, password })
       .then(result => {
         console.log("result", result);
         localStorage.setItem("jwtToken", result.data.token);
@@ -43,46 +43,46 @@ class Login extends Component {
   render() {
     const { email, password, message } = this.state;
     return (
-      <div class="container">
-        <form class="form-signin" onSubmit={this.onSubmit}>
+      <div className="container">
+        <form className="form-signin" onSubmit={this.onSubmit}>
           {message !== "" && (
-            <div class="alert alert-warning alert-dismissible" role="alert">
+            <div className="alert alert-warning alert-dismissible" role="alert">
               {message}
             </div>
           )}
-          <h2 class="form-signin-heading">Please sign in</h2>
-          <label for="inputEmail" class="sr-only">
+          <h2 className="form-signin-heading">Please sign in</h2>
+          <label htmlFor="inputEmail" className="sr-only">
             Email address
           </label>
           <input
             type="email"
-            class="form-control"
+            className="form-control"
             placeholder="Email address"
             name="email"
             value={email}
             onChange={this.onChange}
             required
           />
-          <label for="inputPassword" class="sr-only">
+          <label htmlFor="inputPassword" className="sr-only">
             Password
           </label>
           <input
             type="password"
-            class="form-control"
+            className="form-control"
             placeholder="Password"
             name="password"
             value={password}
             onChange={this.onChange}
             required
           />
-          <button class="btn btn-lg btn-primary btn-block" type="submit">
+          <button className="btn btn-lg btn-primary btn-block" type="submit">
             Login
           </button>
           <p>
             Not a member?{" "}
             <Link to="/register">
               <span
-                class="glyphicon glyphicon-plus-sign"
+                className="glyphicon glyphicon-plus-sign"
                 aria-hidden="true"
               ></span>{" "}
               Register here
