@@ -5,10 +5,10 @@ export function DisplayLayout(props) {
       
         <div className="container">
         <div className="row">
-          <div className="col-md-3">
+          <div className="col-lg-3">
             This is where the expense and income info will display.
           </div>
-          <div className="col-md-9">
+          <div className="col-lg-9">
             This is where the graphs will display.
           </div>
           
