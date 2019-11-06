@@ -19,6 +19,18 @@ var UserSchema = new Schema({
   college: {
     type: String,
     unique: true
+  },
+  expenses: {
+    type: Array,
+    ref: 'Expense'
+  },
+  incomes: {
+    type: Array,
+    ref: 'Income'
+  },
+  studentLoans: {
+    type: Array,
+    ref: 'StudentLoans'
   }
 });
 

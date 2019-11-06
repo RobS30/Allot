@@ -50,7 +50,12 @@ module.exports = function(app) {
               // if user is found and password is right create a token
               let token = jwt.sign(user.toJSON(), process.env.APP_SECRET);
               // return the information including token as JSON
-              res.json({ success: true, token: "JWT " + token });
+              let newUser = {
+                name: user.name,
+                college: user.college,
+                email: user.email
+              }
+              res.json({ success: true, token: "JWT " + token , user: newUser});
             } else {
               res.status(401).send({
                 success: false,

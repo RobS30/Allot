@@ -3,7 +3,19 @@ import axios from "axios";
 import "./App.css";
 
 class App extends Component {
+
+  state = {
+    user: {}
+  }
+
   componentDidMount() {
+
+    let newUser = JSON.parse(localStorage.getItem("user"));
+    
+    this.setState({
+      user: JSON.parse(localStorage.getItem("user"))
+    })
+    
     axios.defaults.headers.common["Authorization"] = localStorage.getItem(
       "jwtToken"
     );
@@ -21,6 +33,7 @@ class App extends Component {
 
   logout = () => {
     localStorage.removeItem("jwtToken");
+    localStorage.removeItem("user");
     window.location.reload();
   };
 
@@ -30,14 +43,17 @@ class App extends Component {
         <div className="panel panel-default">
           <div className="panel-heading">
             <h3 className="panel-title">
-              allot <small>is here</small>
-              {localStorage.getItem("jwtToken") && (
-                <button className="btn btn-primary" onClick={this.logout}>
-                  Logout
+              allot <small>is here!</small>
+              {localStorage.getItem("user") && (
+                <div>
+                  <h2 className="panel-title">Welcome {this.state.user.name}</h2>
+                  <button className="btn btn-primary" onClick={this.logout}>
+                    Logout
                 </button>
+                </div>
               )}
             </h3>
-          </div>          
+          </div>
         </div>
       </div>
     );
