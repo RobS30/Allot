@@ -7,6 +7,7 @@ class Login extends Component {
   constructor() {
     super();
     this.state = {
+      name: "",
       email: "",
       password: "",
       message: ""
@@ -26,9 +27,10 @@ class Login extends Component {
     axios
       .post("/api/login", { email, password })
       .then(result => {
-        console.log("result", result);
+        //console.log("result", result);
         localStorage.setItem("jwtToken", result.data.token);
         this.setState({ message: "" });
+        localStorage.setItem("user", JSON.stringify(result.data.user));
         this.props.history.push("/");
       })
       .catch(error => {
