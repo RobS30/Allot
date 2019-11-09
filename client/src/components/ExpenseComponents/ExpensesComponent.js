@@ -1,6 +1,7 @@
 import React from "react";
-import ExpenseInput from "./ExpenseComponent";
-import ExpenseButton from "./AddExpenseInputButton";
+import axios from "axios";
+import ExpenseComponent from "./ExpenseComponent";
+import ExpenseForm from "./ExpenseForm";
 
 class ExpensesComponent extends React.Component {
   state = {
@@ -28,10 +29,10 @@ class ExpensesComponent extends React.Component {
     e.preventDefault();
     
     const {
-      expenseName,
-      expenseAmount,
-      expenseCategory,
-      expenseFrequency
+      name,
+      value,
+      category,
+      frequency
     } = e.target;
 
     let user = {};

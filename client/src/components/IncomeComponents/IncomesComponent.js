@@ -1,5 +1,5 @@
 import React from "react";
-
+import axios from "axios";
 import IncomeComponent from "./IncomeComponent";
 import IncomeForm from "./IncomeForm";
 
@@ -87,7 +87,7 @@ class IncomesComponent extends React.Component {
         </div>
 
         <div>
-          <ExpenseForm handleSubmit={this.handleSubmit} />
+          <IncomeForm handleSubmit={this.handleSubmit} />
         </div>
       </>
     );
