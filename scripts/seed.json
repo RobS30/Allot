@@ -1,12 +1,4 @@
-const mongoose = require("mongoose");
-const SalariesbyMajorSchema = require("../models/SalariesbyMajor");
-
-mongoose.connect(
-  process.env.MONGODB_URI ||
-  "mongodb://localhost/allotDB"
-);
-
-const salariesbyMajorSeed = [
+[
   {
     "Occupational_Code": "00-0000",
     "Job_Title": "All Occupations",
@@ -19314,15 +19306,3 @@ const salariesbyMajorSeed = [
     "A_PCT90": "58,140"
   }
 ]
-
-SalariesbyMajorSchema
-  .remove({})
-  .then(() => SalariesbyMajorSchema.collection.insertMany(salariesbyMajorSeed))
-  .then(data => {
-    console.log(data.result.n + " records inserted!");
-    process.exit(0);
-  })
-  .catch(err => {
-    console.error(err);
-    process.exit(1);
-  });
