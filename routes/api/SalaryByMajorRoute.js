@@ -30,10 +30,28 @@ module.exports = function (app) {
         data.forEach(element => {
             jobs.push({
                 "job" : element.Job_Title,
+                "salary" : element.Mean_Annual_Salary,
                 "id" : element._id
             })
         })
         console.log(jobs)
         return jobs;
-    }
+    };
+
+    app.get(
+        "/api/salaries/:id",
+        passport.authenticate("jwt", { session: false }),
+        function(req, res) {
+          var token = getToken(req.headers);
+          if (token) {
+              SalariesByMajor.findById(req.params.id, function(err, dbResult) {
+              if (err) return next(err);
+              res.json(dbResult);
+            });
+          } else {
+            return res.status(403).send({ success: false, msg: "Unauthorized." });
+          }
+        }
+      );
+
 }; 
