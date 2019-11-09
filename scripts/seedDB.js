@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const SalariesbyMajorSchema = require("../models/SalariesbyMajor");
+const SalariesbyMajorSchema = require("../models/SalariesbyMajorModel");
 
 mongoose.connect(
   process.env.MONGODB_URI ||
@@ -19313,9 +19313,10 @@ const salariesbyMajorSeed = [
     A_PCT75: "40,960",
     A_PCT90: "58,140"
   }
-]
+];
 
 SalariesbyMajorSchema
+
   .remove({})
   .then(() => SalariesbyMajorSchema.collection.insertMany(salariesbyMajorSeed))
   .then(data => {

@@ -4,6 +4,7 @@ const logger = require('morgan');
 const PORT = process.env.PORT || 3001;
 const budget = require('./routes/api/budget');
 const auth = require('./routes/api/auth');
+const SalaryByMajor = require('./routes/api/SalaryByMajorRoute')
 const mongoose = require('mongoose');
 
 const app = express();
@@ -25,6 +26,7 @@ if (process.env.NODE_ENV === "production") {
 // Define API routes here
 require('./routes/api/budget')(app);
 require('./routes/api/auth')(app);
+require('./routes/api/SalaryByMajorRoute')(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
