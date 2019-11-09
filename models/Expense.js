@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 const ExpenseSchema = new Schema({
   name: {
     type: String,
-    unique: true,
+    unique: false,
     required: true
   },
   category: {

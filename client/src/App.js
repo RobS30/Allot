@@ -11,7 +11,7 @@ class App extends Component {
     
     let user = {};
     if (localStorage.getItem("user")) {
-      user = localStorage.getItem("user");
+      user = JSON.parse(localStorage.getItem("user"));
     }
     this.setState({
       user: user
@@ -39,22 +39,31 @@ class App extends Component {
   };
 
   addExpense = () => {
+
+    let user = {};
+    if (localStorage.getItem("user")) {
+      user = JSON.parse(localStorage.getItem("user"));
+    }
+
     const expense = {
       name: "NetFlix",
       category: "Entertainment",
-      value: 17.99,
+      value: 15.99,
       frequency: "monthly",
-      email: this.state.user.email
+      email: user.email
     };
+    
     axios.defaults.headers.common["Authorization"] = localStorage.getItem(
       "jwtToken"
     );
     axios
       .post("/api/expenses", expense)
       .then(res => {
-        console.log("expenses:", res.data.expenses);
+        console.log({res})
+        console.log(res.data)
       })
       .catch(error => {
+        console.log('error', error)
         if (error.response.status === 401) {
           this.props.history.push("/login");
         }
