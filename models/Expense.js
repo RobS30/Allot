@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const bcrypt = require("bcrypt-nodejs");
+const bcrypt = require("bcryptjs");
 
 const ExpenseSchema = new Schema({
   name: {
@@ -17,7 +17,7 @@ const ExpenseSchema = new Schema({
     required: true
   },
   frequency: {
-    type: Number,
+    type: String,
     required: true
   }
 });
