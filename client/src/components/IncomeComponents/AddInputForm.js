@@ -7,24 +7,24 @@ class Create extends Component {
   constructor() {
     super();
     this.state = {
-      expenseName: "",
-      expenseAmount: "",
-      expenseCategory: "",
-      expenseFrequency: ""
+      incomeName: "",
+      incomeAmount: "",
+      incomeCategory: "",
+      incomeFrequency: ""
     };
   }
   onChange = e => {
     const state = this.state;
-    state[e.targetexpenseName] = e.target.value;
+    state[e.target.incomeName] = e.target.value;
     this.setState(state);
   };
 
   onSubmit = e => {
     e.preventDefault();
 
-    const { expenseName, expenseAmount, expenseCategory, expenseFrequency } = this.state;
+    const { incomeName, incomeAmount, incomeCategory, incomeFrequency } = this.state;
 
-    axios.post("/api/addExpense", { expenseName, expenseAmount, expenseCategory, expenseFrequency }).then(result => {
+    axios.post("/api/addExpense", { incomeName, incomeAmount, incomeCategory, incomeFrequency }).then(result => {
       this.props.history.push("/login");
     }).catch(err => {
       console.log(err);
@@ -32,32 +32,32 @@ class Create extends Component {
   };
 
   render() {
-    const { name, email, password, college } = this.state;
+    const { incomeName, incomeAmount, incomeCategory, incomeFrequency } = this.state;
     return (
       <div className="container">
         <form className="form-inline" onSubmit={this.onSubmit}>
-          <h3 className="form-signin-heading">Add Expense</h3>
+          <h3 className="form-signin-heading">Add Income</h3>
           <label htmlFor="inputName" className="sr-only">
             Name
           </label>
           <input
             type="text"
             className="form-control"
-            placeholder="Expense Name"
-            name="expenseName"
-            value={expenseName}
+            placeholder="Income Name"
+            name="incomeName"
+            value={incomeName}
             onChange={this.onChange}
             required
           />
           <label htmlFor="inputAmount" className="sr-only">
-            Expense Amount
+            Income Amount
           </label>
           <input
             type="text"
             className="form-control"
             placeholder="$3,000"
-            name="expenseAmount"
-            value={expenseAmount}
+            name="incomeAmount"
+            value={incomeAmount}
             onChange={this.onChange}
             required
           />
@@ -67,9 +67,9 @@ class Create extends Component {
           <input
             type="text"
             className="form-control"
-            placeholder="Housing"
-            name="expenseCategory"
-            value={expenseCategory}
+            placeholder="Job"
+            name="incomeCategory"
+            value={incomeCategory}
             onChange={this.onChange}
             required
           />
@@ -80,8 +80,8 @@ class Create extends Component {
             type="text"
             className="form-control"
             placeholder="1 (this would be every month) "
-            name="expenseFrequency"
-            value={expenseFrequency}
+            name="incomeFrequency"
+            value={incomeFrequency}
             onChange={this.onChange}
 
           />
