@@ -29,7 +29,7 @@ var UserSchema = new Schema({
   }],
   studentLoans: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'StudentLoans'
+    ref: 'StudentLoan'
   }]
 });
 
