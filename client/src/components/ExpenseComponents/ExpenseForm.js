@@ -3,39 +3,28 @@ import ReactDOM from "react-dom";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-class Create extends Component {
+class ExpenseForm extends Component {
   constructor() {
     super();
     this.state = {
-      expenseName: "",
-      expenseAmount: "",
-      expenseCategory: "",
-      expenseFrequency: ""
+      name: "",
+      value: "",
+      category: "",
+      frequency: "",
+      expenses: []
     };
   }
   onChange = e => {
     const state = this.state;
-    state[e.targetexpenseName] = e.target.value;
+    state[e.target.name] = e.target.value;
     this.setState(state);
   };
 
-  onSubmit = e => {
-    e.preventDefault();
-
-    const { expenseName, expenseAmount, expenseCategory, expenseFrequency } = this.state;
-
-    axios.post("/api/addExpense", { expenseName, expenseAmount, expenseCategory, expenseFrequency }).then(result => {
-      this.props.history.push("/login");
-    }).catch(err => {
-      console.log(err);
-    })
-  };
-
   render() {
-    const { name, email, password, college } = this.state;
+    const { name, value, category, frequency } = this.state;
     return (
       <div className="container">
-        <form className="form-inline" onSubmit={this.onSubmit}>
+        <form className="form-inline" onSubmit={this.props.handleSubmit}>
           <h3 className="form-signin-heading">Add Expense</h3>
           <label htmlFor="inputName" className="sr-only">
             Name
@@ -44,8 +33,8 @@ class Create extends Component {
             type="text"
             className="form-control"
             placeholder="Expense Name"
-            name="expenseName"
-            value={expenseName}
+            name="name"
+            value={name}
             onChange={this.onChange}
             required
           />
@@ -53,11 +42,11 @@ class Create extends Component {
             Expense Amount
           </label>
           <input
-            type="text"
+            type="number"
             className="form-control"
             placeholder="$3,000"
-            name="expenseAmount"
-            value={expenseAmount}
+            name="value"
+            value={value}
             onChange={this.onChange}
             required
           />
@@ -68,23 +57,27 @@ class Create extends Component {
             type="text"
             className="form-control"
             placeholder="Housing"
-            name="expenseCategory"
-            value={expenseCategory}
+            name="category"
+            value={category}
             onChange={this.onChange}
             required
           />
           <label htmlFor="inputFrequency" className="sr-only">
-            Frequency By Month
+            Frequency
           </label>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="1 (this would be every month) "
-            name="expenseFrequency"
-            value={expenseFrequency}
+          
+            <select 
+            value={frequency} 
             onChange={this.onChange}
-
-          />
+            name="frequency"
+            className="form-control" id="sel1">
+              <option value="monthly">Monthly</option>
+              <option value="bi-monthly">Bi-Monthly</option>
+              <option value="annual">Annual</option>
+              <option value="semi-annual"> Semi-Annual</option>
+      
+            </select>
+          
           <button className="btn btn-lg btn-primary btn-block" type="submit">
             +
           </button>
@@ -94,4 +87,4 @@ class Create extends Component {
   }
 }
 
-export default Create;
+export default ExpenseForm;

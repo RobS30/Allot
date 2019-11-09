@@ -6,6 +6,9 @@ class IncomeInput extends React.Component {
       <div>
         <div>
           <span>{this.props.name}</span>
+          <span>{this.props.value}</span>
+          <span>{this.props.category}</span>
+          <span>{this.props.frequency}</span>
         </div>
       </div>
     );
