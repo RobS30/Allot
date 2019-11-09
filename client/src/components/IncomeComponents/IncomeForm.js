@@ -25,21 +25,21 @@ class IncomeForm extends Component {
     return (
       <div className="container">
         <form className="form-inline" onSubmit={this.props.handleSubmit}>
-          <h3 className="form-signin-heading">Add Expense</h3>
+          <h3 className="form-signin-heading">Add Income</h3>
           <label htmlFor="inputName" className="sr-only">
             Name
           </label>
           <input
             type="text"
             className="form-control"
-            placeholder="Expense Name"
+            placeholder="Income Name (my company)"
             name="name"
             value={name}
             onChange={this.onChange}
             required
           />
           <label htmlFor="inputAmount" className="sr-only">
-            Expense Amount
+            Income Amount
           </label>
           <input
             type="number"
@@ -56,7 +56,7 @@ class IncomeForm extends Component {
           <input
             type="text"
             className="form-control"
-            placeholder="Housing"
+            placeholder="Job"
             name="category"
             value={category}
             onChange={this.onChange}

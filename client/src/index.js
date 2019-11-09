@@ -3,8 +3,8 @@ import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./index.css";
 import App from "./App";
-import Login from "./components/Login";
-import Register from "./components/Register";
+import Login from "./components/LoginPage/Login";
+import Register from "./components/RegisterPage/Register";
 
 ReactDOM.render(
   <Router>

@@ -15,6 +15,10 @@ const IncomeSchema = new Schema({
   value: {
     type: Number,
     required: true
+  },
+  frequency: {
+    type: String,
+    required: true
   }
 });
 
