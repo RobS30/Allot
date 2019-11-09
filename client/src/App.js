@@ -9,8 +9,12 @@ class App extends Component {
 
   componentDidMount() {
     
+    let user = {};
+    if (localStorage.getItem("user")) {
+      user = localStorage.getItem("user");
+    }
     this.setState({
-      user: JSON.parse(localStorage.getItem("user"))
+      user: user
     });
 
     axios.defaults.headers.common["Authorization"] = localStorage.getItem(
