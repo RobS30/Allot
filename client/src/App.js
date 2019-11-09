@@ -59,8 +59,8 @@ class App extends Component {
     axios
       .post("/api/expenses", expense)
       .then(res => {
-        console.log({res})
-        console.log(res.data)
+        
+        console.log(res.data.length)
       })
       .catch(error => {
         console.log('error', error)

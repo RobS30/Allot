@@ -4,7 +4,6 @@ const User = require("../../models/User");
 const Expense = require("../../models/Expense");
 const Income = require("../../models/Income");
 const StudentLoans = require("../../models/StudentLoans");
-const axios = require('axios');
 require("../../config/passport")(passport);
 
 module.exports = function (app) {
@@ -25,6 +24,31 @@ module.exports = function (app) {
     }
   );
 
+  ///////////////////////////////
+  // get expenses
+  app.get(
+    "/api/expenses/:email",
+    passport.authenticate("jwt", { session: false }),
+    function (req, res) {
+      console.log('req.params',req.params)
+      let token = getToken(req.headers);
+      if (token) {
+        User.find({
+          email: req.params.email
+        }).populate('expenses').then(function (dbUser) {
+          // If able to successfully find and associate all Users and Notes, send them back to the client
+          res.json(dbUser[0].expenses);
+        })
+          .catch(function (err) {
+            // If an error occurs, send it back to the client
+            console.log({ err })
+            res.json(err);
+          });
+      } else {
+        return res.status(403).send({ success: false, msg: "Unauthorized." });
+      }
+    }
+  );
   ///////////////////////////////
   // save expenses
   app.post(
@@ -82,6 +106,30 @@ module.exports = function (app) {
   ///////////////////////////////
 
   //////////////////////////////
+  // get incomes
+  app.get(
+    "/api/incomes/:email",
+    passport.authenticate("jwt", { session: false }),
+    function (req, res) {
+      let token = getToken(req.headers);
+      if (token) {
+        User.find({
+          email: req.params.email
+        }).populate('incomes').then(function (dbUser) {
+          // If able to successfully find and associate all Users and Notes, send them back to the client
+          res.json(dbUser[0].incomes);
+        })
+          .catch(function (err) {
+            // If an error occurs, send it back to the client
+            console.log({ err })
+            res.json(err);
+          });
+      } else {
+        return res.status(403).send({ success: false, msg: "Unauthorized." });
+      }
+    }
+  );
+  /////////////////////////////
   // save incomes
   app.post(
     "/api/incomes",
@@ -136,6 +184,30 @@ module.exports = function (app) {
   /////////////////////////////
 
   ////////////////////////////
+  // get student loans
+  app.get(
+    "/api/studentLoans/:email",
+    passport.authenticate("jwt", { session: false }),
+    function (req, res) {
+      let token = getToken(req.headers);
+      if (token) {
+        User.find({
+          email: req.params.email
+        }).populate('studentLoans').then(function (dbUser) {
+          // If able to successfully find and associate all Users and Notes, send them back to the client
+          res.json(dbUser[0].studentLoans);
+        })
+          .catch(function (err) {
+            // If an error occurs, send it back to the client
+            console.log({ err })
+            res.json(err);
+          });
+      } else {
+        return res.status(403).send({ success: false, msg: "Unauthorized." });
+      }
+    }
+  );
+  ///////////////////////////
   // save student loans
   app.post(
     "/api/studentLoans",
