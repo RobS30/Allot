@@ -11,8 +11,8 @@ class App extends Component {
   componentDidMount() {
     
     let user = {};
-    if (localStorage.getItem("user")) {
-      user = JSON.parse(localStorage.getItem("user"));
+    if (sessionStorage.getItem("user")) {
+      user = JSON.parse(sessionStorage.getItem("user"));
     }
     this.setState({
       user: user
@@ -21,9 +21,15 @@ class App extends Component {
   }
 
   logout = () => {
-    localStorage.removeItem("jwtToken");
-    localStorage.removeItem("user");
+    sessionStorage.removeItem("jwtToken");
+    sessionStorage.removeItem("user");
     window.location.reload();
+  };
+
+  login = () => {
+    sessionStorage.removeItem("jwtToken");
+    sessionStorage.removeItem("user");
+    window.location.assign('/login');
   };
 
   render() {
@@ -33,7 +39,7 @@ class App extends Component {
           <div className="panel-heading">
             <h3 className="panel-title">
               allot <small>is here!</small>
-              {localStorage.getItem("user") && (
+              {sessionStorage.getItem("user") ? (
                 <React.Fragment>
                   <div>
                     <h2 className="panel-title">
@@ -43,8 +49,18 @@ class App extends Component {
                       Logout
                     </button>
                   </div>
-<MainDisplay />
-                  
+                  <MainDisplay />
+                </React.Fragment>
+              ) : (
+                <React.Fragment>
+                  <div>
+                    <h2 className="panel-title">
+                      Welcome
+                    </h2>
+                    <button className="btn btn-primary" onClick={this.login}>
+                      Login
+                    </button>
+                  </div>                  
                 </React.Fragment>
               )}
             </h3>
