@@ -42,9 +42,9 @@ class ExpenseForm extends Component {
             Expense Amount
           </label>
           <input
-            type="number"
+            type="text"
             className="form-control"
-            placeholder="$3,000"
+            placeholder="Expense Amount"
             name="value"
             value={value}
             onChange={this.onChange}
@@ -56,7 +56,7 @@ class ExpenseForm extends Component {
           <input
             type="text"
             className="form-control"
-            placeholder="Housing"
+            placeholder="Expense Category"
             name="category"
             value={category}
             onChange={this.onChange}
