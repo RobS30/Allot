@@ -8,10 +8,6 @@ const IncomeSchema = new Schema({
     unique: true,
     required: true
   },
-  category: {
-    type: String,
-    required: true
-  },
   value: {
     type: Number,
     required: true

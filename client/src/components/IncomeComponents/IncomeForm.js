@@ -9,7 +9,6 @@ class IncomeForm extends Component {
     this.state = {
       name: "",
       value: "",
-      category: "",
       frequency: "",
       expenses: []
     };
@@ -32,7 +31,7 @@ class IncomeForm extends Component {
           <input
             type="text"
             className="form-control"
-            placeholder="Income Name (my company)"
+            placeholder="Income Name"
             name="name"
             value={name}
             onChange={this.onChange}
@@ -42,9 +41,9 @@ class IncomeForm extends Component {
             Income Amount
           </label>
           <input
-            type="number"
+            type="text"
             className="form-control"
-            placeholder="$3,000"
+            placeholder="Income Amount"
             name="value"
             value={value}
             onChange={this.onChange}
@@ -52,21 +51,8 @@ class IncomeForm extends Component {
           />
           <label htmlFor="inputCategory" className="sr-only">
             Category
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Job"
-            name="category"
-            value={category}
-            onChange={this.onChange}
-            required
-          />
-          <label htmlFor="inputFrequency" className="sr-only">
-            Frequency
-          </label>
-          
-            <select 
+          </label>          
+          <select 
             value={frequency} 
             onChange={this.onChange}
             name="frequency"
