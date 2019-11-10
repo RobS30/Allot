@@ -17,10 +17,10 @@ class ExpensesComponent extends React.Component {
     this._isMounted = true;
 
     let user = {};
-    if (localStorage.getItem("user")) {
-      user = JSON.parse(localStorage.getItem("user"));
+    if (sessionStorage.getItem("user")) {
+      user = JSON.parse(sessionStorage.getItem("user"));
     }
-    axios.defaults.headers.common["Authorization"] = localStorage.getItem(
+    axios.defaults.headers.common["Authorization"] = sessionStorage.getItem(
       "jwtToken"
     );
     axios.get("/api/expenses/" + user.id).then(res => {
@@ -43,8 +43,8 @@ class ExpensesComponent extends React.Component {
     const { name, value, category, frequency } = e.target;
 
     let user = {};
-    if (localStorage.getItem("user")) {
-      user = JSON.parse(localStorage.getItem("user"));
+    if (sessionStorage.getItem("user")) {
+      user = JSON.parse(sessionStorage.getItem("user"));
     }
     const expense = {
       name: name.value,
@@ -53,7 +53,7 @@ class ExpensesComponent extends React.Component {
       frequency: frequency.value,
       id: user.id
     };
-    axios.defaults.headers.common["Authorization"] = localStorage.getItem(
+    axios.defaults.headers.common["Authorization"] = sessionStorage.getItem(
       "jwtToken"
     );
     axios

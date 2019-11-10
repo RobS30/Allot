@@ -28,9 +28,9 @@ class Login extends Component {
       .post("/api/login", { email, password })
       .then(result => {
         //console.log("result", result);
-        localStorage.setItem("jwtToken", result.data.token);
+        sessionStorage.setItem("jwtToken", result.data.token);
         this.setState({ message: "" });
-        localStorage.setItem("user", JSON.stringify(result.data.user));
+        sessionStorage.setItem("user", JSON.stringify(result.data.user));
         this.props.history.push("/");
       })
       .catch(error => {
