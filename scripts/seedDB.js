@@ -19313,7 +19313,7 @@ const salariesbyMajorSeed = [
     A_PCT75: "40,960",
     A_PCT90: "58,140"
   }
-];
+]
 
 SalariesbyMajorSchema
 
