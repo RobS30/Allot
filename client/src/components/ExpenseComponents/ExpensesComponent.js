@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import ExpenseComponent from "./ExpenseComponent";
 import ExpenseForm from "./ExpenseForm";
+import "./Expense.css";
 
 class ExpensesComponent extends React.Component {
   _isMounted = false;
@@ -79,8 +80,10 @@ class ExpensesComponent extends React.Component {
       <>
         <div className="row">
           <div className="col-lg-12">
+          <h2>Add Expenses</h2>
             {this.state.expenses.map((expense, index) => {
               return (
+                
                 <ExpenseComponent
                   key={index}
                   name={expense.name}

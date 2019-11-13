@@ -4,10 +4,10 @@ class IncomeInput extends React.Component {
   render() {
     return (
       <div>
-        <div>
-          <span>{this.props.name}</span>
-          <span>{this.props.value}</span>
-          <span>{this.props.frequency}</span>
+        <div className="row">
+          <div className="col">{this.props.name}</div>
+          <div className="col">{this.props.value}</div>
+          <div className="col">{this.props.frequency}</div>
         </div>
       </div>
     );
