@@ -55,7 +55,7 @@ module.exports = function(app) {
               let newUser = {
                 name: user.name,
                 college: user.college,
-                email: user.email
+                id: user._id
               };
               res.json({ success: true, token: "JWT " + token, user: newUser });
             } else {

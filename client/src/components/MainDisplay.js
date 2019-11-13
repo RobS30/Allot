@@ -1,12 +1,13 @@
 import React from "react";
+import ExpenseIncomeDisplay from "./ExpenseIncomeDisplay";
 
-export function DisplayLayout(props) {
+function MainDisplay(props) {
     return (
       
         <div className="container">
         <div className="row">
           <div className="col-lg-3">
-            This is where the expense and income info will display.
+            <ExpenseIncomeDisplay />
           </div>
           <div className="col-lg-9">
             This is where the graphs will display.
@@ -26,3 +27,5 @@ export function DisplayLayout(props) {
       
     );
   }
+
+  export default MainDisplay;

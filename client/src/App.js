@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./App.css";
+import MainDisplay from "./components/MainDisplay"
 
 class App extends Component {
   state = {
@@ -10,77 +11,25 @@ class App extends Component {
   componentDidMount() {
     
     let user = {};
-    if (localStorage.getItem("user")) {
-      user = localStorage.getItem("user");
+    if (sessionStorage.getItem("user")) {
+      user = JSON.parse(sessionStorage.getItem("user"));
     }
     this.setState({
       user: user
     });
 
-    axios.defaults.headers.common["Authorization"] = localStorage.getItem(
-      "jwtToken"
-    );
-    axios
-      .get("/api/budget")
-      .then(res => {
-        console.log(res);
-      })
-      .catch(error => {
-        if (error.response.status === 401) {
-          this.props.history.push("/login");
-        }
-      });
   }
 
   logout = () => {
-    localStorage.removeItem("jwtToken");
-    localStorage.removeItem("user");
+    sessionStorage.removeItem("jwtToken");
+    sessionStorage.removeItem("user");
     window.location.reload();
   };
 
-  addExpense = () => {
-    const expense = {
-      name: "NetFlix",
-      category: "Entertainment",
-      value: 17.99,
-      frequency: "monthly",
-      email: this.state.user.email
-    };
-    axios.defaults.headers.common["Authorization"] = localStorage.getItem(
-      "jwtToken"
-    );
-    axios
-      .post("/api/expenses", expense)
-      .then(res => {
-        console.log("expenses:", res.data.expenses);
-      })
-      .catch(error => {
-        if (error.response.status === 401) {
-          this.props.history.push("/login");
-        }
-      });
-  };
-
-  addIncome = () => {
-    const expense = {
-      name: "Dad",
-      category: "Obligation",
-      value: 300,
-      email: this.state.user.email
-    };
-    axios.defaults.headers.common["Authorization"] = localStorage.getItem(
-      "jwtToken"
-    );
-    axios
-      .post("/api/incomes", expense)
-      .then(res => {
-        console.log("incomes:", res.data.incomes);
-      })
-      .catch(error => {
-        if (error.response.status === 401) {
-          this.props.history.push("/login");
-        }
-      });
+  login = () => {
+    sessionStorage.removeItem("jwtToken");
+    sessionStorage.removeItem("user");
+    window.location.assign('/login');
   };
 
   render() {
@@ -90,7 +39,7 @@ class App extends Component {
           <div className="panel-heading">
             <h3 className="panel-title">
               allot <small>is here!</small>
-              {localStorage.getItem("user") && (
+              {sessionStorage.getItem("user") ? (
                 <React.Fragment>
                   <div>
                     <h2 className="panel-title">
@@ -100,16 +49,18 @@ class App extends Component {
                       Logout
                     </button>
                   </div>
-
+                  <MainDisplay />
+                </React.Fragment>
+              ) : (
+                <React.Fragment>
                   <div>
-                    <h2 className="panel-title">Expenses</h2>
-                    <button
-                      className="btn btn-primary"
-                      onClick={this.addExpense}
-                    >
-                      Add Expense
+                    <h2 className="panel-title">
+                      Welcome
+                    </h2>
+                    <button className="btn btn-primary" onClick={this.login}>
+                      Login
                     </button>
-                  </div>
+                  </div>                  
                 </React.Fragment>
               )}
             </h3>

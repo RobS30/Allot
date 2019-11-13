@@ -17,8 +17,7 @@ var UserSchema = new Schema({
     required: true
   },
   college: {
-    type: String,
-    unique: true
+    type: String
   },
   expenses: [{
     type: mongoose.Schema.Types.ObjectId,
@@ -30,7 +29,7 @@ var UserSchema = new Schema({
   }],
   studentLoans: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'StudentLoans'
+    ref: 'StudentLoan'
   }]
 });
 

@@ -7,23 +7,33 @@ const StudentLoans = require("../../models/StudentLoans");
 require("../../config/passport")(passport);
 
 module.exports = function(app) {
-  // get user budget
+  
+  ///////////////////////////////
+  // get expenses
   app.get(
-    "/api/budget",
+    "/api/expenses/:id",
     passport.authenticate("jwt", { session: false }),
     function(req, res) {
-      var token = getToken(req.headers);
+      let token = getToken(req.headers);
       if (token) {
-        Expense.find(function(err, dbExpenses) {
-          if (err) return next(err);
-          res.json(dbExpenses);
-        });
+        User.findById(req.params.id)
+          .populate("expenses")
+          .then(function(dbUser) {
+            console.log({dbUser})
+            // If able to successfully find and associate all Users and Notes, send them back to the client
+            res.json(dbUser.expenses);
+          })
+          .catch(function(err) {
+            // If an error occurs, send it back to the client
+            console.log({ err });
+            res.json(err);
+          });
       } else {
         return res.status(403).send({ success: false, msg: "Unauthorized." });
       }
     }
   );
-
+  ///////////////////////////////
   // save expenses
   app.post(
     "/api/expenses",
@@ -31,39 +41,74 @@ module.exports = function(app) {
     function(req, res) {
       let token = getToken(req.headers);
       if (token) {
-
         Expense.create({
           name: req.body.name,
           category: req.body.category,
           value: req.body.value,
           frequency: req.body.frequency
-        })
-          .then(function(dbExpense) {
-            console.log('dbExpense', dbExpense)
-            return User.findOneAndUpdate(
-              {
-                email: req.body.email
-              },
-              { $push: { expenses: dbExpense._id } },
-              { new: true }
-            );
-          })
-          .then(function(dbUser) {
-            //console.log('dbUser', dbUser);
-            // If the User was updated successfully, send it back to the client
-            res.json(dbUser);
-          })
-          .catch(function(err) {
-            // If an error occurs, send it back to the client
-            res.json(err);
-          });
+        }).then(function(dbExpense) {
+          User.update(
+            {
+              _id: req.body.id
+            },
+            { $push: { expenses: dbExpense._id } },
+            { new: true }
+          )
+            .then(function(dbUser) {
+              // If the User was updated successfully, send it back to the client
+              //console.log('1',req.body.id)
+              User.findById(req.body.id)
+                .populate("expenses")
+                .then(function(dbUser) {
+                  // If able to successfully find and associate all Users and Notes, send them back to the client
+                  //console.log('1', dbUser)
+                  res.json(dbUser.expenses);
+                })
+                .catch(function(err) {
+                  // If an error occurs, send it back to the client
+                  console.log({ err });
+                  res.json(err);
+                });
+            })
+            .catch(function(err) {
+              // If an error occurs, send it back to the client
+              console.log("2", { err });
+              res.json(err);
+            });
+        });
         // return res.status(200).send({ success: true, msg: "" });
       } else {
         return res.status(403).send({ success: false, msg: "Unauthorized." });
       }
     }
   );
+  ///////////////////////////////
 
+  //////////////////////////////
+  // get incomes
+  app.get(
+    "/api/incomes/:id",
+    passport.authenticate("jwt", { session: false }),
+    function(req, res) {
+      let token = getToken(req.headers);
+      if (token) {
+        User.findById(req.params.id)
+          .populate("incomes")
+          .then(function(dbUser) {
+            // If able to successfully find and associate all Users and Notes, send them back to the client
+            res.json(dbUser.incomes);
+          })
+          .catch(function(err) {
+            // If an error occurs, send it back to the client
+            console.log({ err });
+            res.json(err);
+          });
+      } else {
+        return res.status(403).send({ success: false, msg: "Unauthorized." });
+      }
+    }
+  );
+  /////////////////////////////
   // save incomes
   app.post(
     "/api/incomes",
@@ -71,38 +116,73 @@ module.exports = function(app) {
     function(req, res) {
       let token = getToken(req.headers);
       if (token) {
-
         Income.create({
           name: req.body.name,
-          category: req.body.category,
+          frequency: req.body.frequency,
           value: req.body.value
-        })
-          .then(function(dbIncome) {
-            console.log('dbIncome', dbIncome)
-            return User.findOneAndUpdate(
-              {
-                email: req.body.email
-              },
-              { $push: { incomes: dbIncome._id } },
-              { new: true }
-            );
-          })
-          .then(function(dbUser) {
-            //console.log('dbUser', dbUser);
-            // If the User was updated successfully, send it back to the client
-            res.json(dbUser);
-          })
-          .catch(function(err) {
-            // If an error occurs, send it back to the client
-            res.json(err);
-          });
+        }).then(function(dbIncome) {
+          console.log(dbIncome._id);
+          User.update(
+            {
+              _id: req.body.id
+            },
+            { $push: { incomes: dbIncome._id } },
+            { new: true }
+          )
+            .then(function(dbUser) {
+              // If the User was updated successfully, send it back to the client
+              console.log('2',req.body.id)
+              User.findById(req.body.id)
+                .populate("incomes")
+                .then(function(dbUser) {
+                  // If able to successfully find and associate all Users and Notes, send them back to the client
+                  res.json(dbUser.incomes);
+                })
+                .catch(function(err) {
+                  // If an error occurs, send it back to the client
+                  console.log({ err });
+                  res.json(err);
+                });
+            })
+            .catch(function(err) {
+              // If an error occurs, send it back to the client
+              console.log("2", { err });
+              res.json(err);
+            });
+        });
         // return res.status(200).send({ success: true, msg: "" });
       } else {
         return res.status(403).send({ success: false, msg: "Unauthorized." });
       }
     }
   );
+  /////////////////////////////
 
+  ////////////////////////////
+  // get student loans
+  app.get(
+    "/api/studentLoans/:id",
+    passport.authenticate("jwt", { session: false }),
+    function(req, res) {
+      let token = getToken(req.headers);
+      if (token) {
+        User.findById(req.params.id)
+          .populate("studentLoans")
+          .then(function(dbUser) {
+            // If able to successfully find and associate all Users and Notes, send them back to the client
+            res.json(dbUser.studentLoans);
+          })
+          .catch(function(err) {
+            // If an error occurs, send it back to the client
+            console.log({ err });
+            res.json(err);
+          });
+      } else {
+        return res.status(403).send({ success: false, msg: "Unauthorized." });
+      }
+    }
+  );
+  ///////////////////////////
   // save student loans
   app.post(
     "/api/studentLoans",
@@ -110,38 +190,49 @@ module.exports = function(app) {
     function(req, res) {
       let token = getToken(req.headers);
       if (token) {
-
         StudentLoans.create({
           name: req.body.name,
-          interest: req.body.category,
+          interest: req.body.interest,
           value: req.body.value
-        })
-          .then(function(dbStudentLoan) {
-            console.log('dbStudentLoan', dbStudentLoan)
-            return User.findOneAndUpdate(
-              {
-                email: req.body.email
-              },
-              { $push: { studentLoans: dbStudentLoan._id } },
-              { new: true }
-            );
-          })
-          .then(function(dbUser) {
-            //console.log('dbUser', dbUser);
-            // If the User was updated successfully, send it back to the client
-            res.json(dbUser);
-          })
-          .catch(function(err) {
-            // If an error occurs, send it back to the client
-            res.json(err);
-          });
+        }).then(function(dbStudentLoan) {
+          console.log(dbStudentLoan._id);
+          User.update(
+            {
+              _id: req.body.id
+            },
+            { $push: { studentLoans: dbStudentLoan._id } },
+            { new: true }
+          )
+            .then(function(dbUser) {
+              // If the User was updated successfully, send it back to the client
+              console.log('3',{dbUser})
+              User.findById(req.body.id)
+                .populate("studentLoans")
+                .then(function(dbUser) {
+                  // If able to successfully find and associate all Users and Notes, send them back to the client
+                  res.json(dbUser.studentLoans);
+                })
+                .catch(function(err) {
+                  // If an error occurs, send it back to the client
+                  console.log({ err });
+                  res.json(err);
+                });
+            })
+            .catch(function(err) {
+              // If an error occurs, send it back to the client
+              console.log("2", { err });
+              res.json(err);
+            });
+        });
         // return res.status(200).send({ success: true, msg: "" });
       } else {
         return res.status(403).send({ success: false, msg: "Unauthorized." });
       }
     }
   );
+  //////////////////////////////////
 
+  //////////////////////////////////
   getToken = function(headers) {
     if (headers && headers.authorization) {
       var parted = headers.authorization.split(" ");
@@ -154,4 +245,5 @@ module.exports = function(app) {
       return null;
     }
   };
+  //////////////////////////////////
 };
