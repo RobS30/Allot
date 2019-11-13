@@ -233,6 +233,41 @@ module.exports = function(app) {
   //////////////////////////////////
 
   //////////////////////////////////
+  // get net worth
+  // get incomes
+  // get expenses
+  // get loans
+  app.get(
+    "/api/networth/:id",
+    passport.authenticate("jwt", { session: false }),
+    function(req, res) {
+      let token = getToken(req.headers);
+      if (token) {
+        User.findById(req.params.id)
+          .populate("expenses incomes studentLoans")
+          .then(function(dbUser) {
+            console.log(dbUser.expenses)
+            console.log(dbUser.incomes)
+            console.log(dbUser.studentLoans)
+            res.json(dbUser);            
+          })
+          .catch(function(err) {
+            // If an error occurs, send it back to the client
+            console.log({ err });
+            res.json(err);
+          });
+      } else {
+        return res.status(403).send({ success: false, msg: "Unauthorized." });
+      }
+    }
+  );
+  //////////////////////////////////
+
+  getTotals = function(total, obj) {
+    
+    return total + obj.value;
+  }
+  //////////////////////////////////
   getToken = function(headers) {
     if (headers && headers.authorization) {
       var parted = headers.authorization.split(" ");
