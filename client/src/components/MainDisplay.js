@@ -3,13 +3,13 @@ import ExpenseIncomeDisplay from "./ExpenseIncomeDisplay";
 
 function MainDisplay(props) {
     return (
-      
-        <div className="container">
+     
+        <div className="container mt-4">
         <div className="row">
-          <div className="col-lg-3">
+          <div className="col-lg-4">
             <ExpenseIncomeDisplay />
           </div>
-          <div className="col-lg-9">
+          <div className="col-lg-8">
             This is where the graphs will display.
           </div>
           

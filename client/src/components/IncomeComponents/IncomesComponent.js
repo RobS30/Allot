@@ -75,8 +75,9 @@ class IncomesComponent extends React.Component {
   render() {
     return (
       <>
-        <div className="row">
+        <div className="row mt-5">
           <div className="col-lg-12">
+            <h2>Add Income Sources</h2>
             {this.state.incomes.map((income, index) => {
               return (
                 <IncomeComponent
