@@ -36,7 +36,7 @@ class App extends Component {
 
   render() {
     return (
-      <>
+      <div className="main-body">
       <Nav />
             <div className="container">
       
@@ -58,7 +58,7 @@ class App extends Component {
               )}
         
       </div>
-      </>
+      </div>
     );
   }
 }

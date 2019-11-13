@@ -36,7 +36,7 @@ class Nav extends Component {
 
   render() {
     return (
-      <>
+      <div className="top-nav">
               {sessionStorage.getItem("user") ? (
               
                 <Navbar className="container">
@@ -52,7 +52,7 @@ class Nav extends Component {
               </Navbar>
                
     ) : (<div>Login</div>)}
-    </>
+    </div>
     )
 
 }}
