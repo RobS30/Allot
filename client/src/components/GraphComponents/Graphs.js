@@ -67,54 +67,10 @@ class GraphComponent extends React.Component {
       <>
         <div className="container">
           <div className="row">
-            <div className="col-lg">
-              
-            <div className="card" style={ {width: "18rem"} }>
-               <div className="card-body">
-                  <h5 className="card-title">Debt To Income Ratio</h5>
-                  <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                  <p className="card-text">
-                   .4
-                  </p>
-                  <a href="#" className="card-link">
-                    Link??
-                  </a>
-                </div>
-              </div>
-
-            </div>
-            <div className="col-lg">
-
-            <div className="card" style={ {width: "18rem"} }>
-                <div className="card-body">
-                  <h5 className="card-title">Expected Debt Short-Term</h5>
-                  <h6 className="card-subtitle mb-2 text-muted">$35,000</h6>
-                  <p className="card-text">
-                   .4
-                  </p>
-                  <a href="#" className="card-link">
-                    Link??
-                  </a>
-                </div>
-              </div>
-
-            </div>
-            <div className="col-lg">
-
-            <div className="card" style={ {width: "18rem"} }>
-                <div className="card-body">
-                  <h5 className="card-title">Expected Income Short-Term</h5>
-                  <h6 className="card-subtitle mb-2 text-muted">$45,000</h6>
-                  <p className="card-text">
-                   .4
-                  </p>
-                  <a href="#" className="card-link">
-                    Link??
-                  </a>
-                </div>
-              </div>
-
-            </div>
+            <div className="col-lg-12">Graph One Goes Here</div>
+          </div>
+          <div className="row">
+            <div className="col-lg-12 mt-4">Graph Two Goes Here</div>
           </div>
         </div>
       </>

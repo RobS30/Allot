@@ -1,5 +1,6 @@
 import React from "react";
 import ExpenseIncomeDisplay from "./ExpenseIncomeDisplay";
+import GraphComponent from "./GraphComponents/Graphs";
 
 function MainDisplay(props) {
     return (
@@ -10,7 +11,7 @@ function MainDisplay(props) {
             <ExpenseIncomeDisplay />
           </div>
           <div className="col-lg-8">
-            This is where the graphs will display.
+            <GraphComponent />
           </div>
           
         </div>
