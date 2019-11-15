@@ -23,10 +23,10 @@ class ExpenseForm extends Component {
   render() {
     const { name, value, category, frequency } = this.state;
     return (
-      <Form onSubmit={this.props.handleSubmit}>
+      <Form className="mt-2" onSubmit={this.props.handleSubmit}>
         <Row className="mb-2">
-          <Col>
-            <Form.Label>Expense Name</Form.Label>
+          <Col className="mr-1">
+            <Form.Label>Expense</Form.Label>
             <Form.Control
               size="sm"
               type="text"
@@ -38,7 +38,7 @@ class ExpenseForm extends Component {
               required
             />
           </Col>
-          <Col>
+          <Col className="mr-1">
           <Form.Label>Amount</Form.Label>
             <Form.Control
               size="sm"
@@ -51,7 +51,7 @@ class ExpenseForm extends Component {
               required
             />
           </Col>
-          <Col>
+          <Col className="mr-1">
           <Form.Label>Category</Form.Label>
             <Form.Control
               size="sm"
@@ -64,7 +64,7 @@ class ExpenseForm extends Component {
               required
             />
           </Col>
-          <Col>
+          <Col className="mr-1">
           <Form.Label htmlFor="inputFrequency" >Frequency</Form.Label>
             <Form.Control size="sm" as="select"
              value={frequency} 
