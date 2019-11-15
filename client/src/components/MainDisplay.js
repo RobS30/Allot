@@ -3,9 +3,9 @@ import ExpenseIncomeDisplay from "./ExpenseIncomeDisplay";
 import GraphComponent from "./GraphComponents/Graphs";
 
 function MainDisplay(props) {
-    return (
-     
-        <div className="container mt-4">
+  return (
+    <div className="main-display">
+      <div className="container mt-4">
         <div className="row">
           <div className="col-lg-4">
             <ExpenseIncomeDisplay />
@@ -13,20 +13,18 @@ function MainDisplay(props) {
           <div className="col-lg-8">
             <GraphComponent />
           </div>
-          
         </div>
         <div className="row">
           <div className="col-md-6">
             Additional Information if we want will display here.
           </div>
           <div className="col-md-6">
-          Additional Information if we want will display here.
+            Additional Information if we want will display here.
           </div>
-          
         </div>
-      </div>  
-      
-    );
-  }
+      </div>
+    </div>
+  );
+}
 
-  export default MainDisplay;
+export default MainDisplay;

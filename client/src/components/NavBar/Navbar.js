@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import LoggedInAs from "./LoggedInAs";
 import { Navbar } from "react-bootstrap";
 import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import "./navbar.css";
 
 
 class Nav extends Component {
@@ -39,19 +39,20 @@ class Nav extends Component {
       <div className="top-nav">
               {sessionStorage.getItem("user") ? (
               
-                <Navbar className="container">
-                <Navbar.Brand href="#home">allot</Navbar.Brand>
+                <Navbar className="myNav">
+                <Navbar.Brand href="#home" className="navBrand">allot</Navbar.Brand>
+                <span className="mt-3 mr-2 debt-text">student debt planning</span>
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">
                   <Navbar.Text>
-                    Signed in as: <span className="mr-2">{this.state.user.name}</span>
-                    <span><button className="btn btn-primary mr-2" onClick={this.logout}>Logout</button></span>
+                  Signed in as: <span className="mr-3 this-user-name">{this.state.user.name}</span>
+                    <span><button className="btn btn-primary mr-2 navBtn" onClick={this.logout}>Logout</button></span>
 
                   </Navbar.Text>
                 </Navbar.Collapse>
               </Navbar>
                
-    ) : (<div>Login</div>)}
+    ) : (<div></div>)}
     </div>
     )
 

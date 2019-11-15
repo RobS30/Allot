@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import "./login.css";
 
 class Login extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       name: "",
       email: "",
@@ -27,11 +28,11 @@ class Login extends Component {
     axios
       .post("/api/login", { email, password })
       .then(result => {
-        //console.log("result", result);
+        console.log("result", result);
         sessionStorage.setItem("jwtToken", result.data.token);
         this.setState({ message: "" });
         sessionStorage.setItem("user", JSON.stringify(result.data.user));
-        this.props.history.push("/");
+        window.location.assign("/");
       })
       .catch(error => {
         if (error.response.status === 401) {
@@ -45,42 +46,46 @@ class Login extends Component {
   render() {
     const { email, password, message } = this.state;
     return (
+      <div className="main-body-reg">
       <div className="container">
+        <div>
+          <h1 className="main-title">allot</h1>
+        </div>
         <form className="form-signin" onSubmit={this.onSubmit}>
           {message !== "" && (
             <div className="alert alert-warning alert-dismissible" role="alert">
               {message}
             </div>
           )}
-          <h2 className="form-signin-heading">Please sign in</h2>
-          <label htmlFor="inputEmail" className="sr-only">
+          <h2 className="form-signin-heading form-thing">Please Sign In</h2>
+          <label htmlFor="inputEmail">
             Email address
           </label>
           <input
             type="email"
-            className="form-control"
+            className="form-control form-thing1"
             placeholder="Email address"
             name="email"
             value={email}
             onChange={this.onChange}
             required
           />
-          <label htmlFor="inputPassword" className="sr-only">
+          <label htmlFor="inputPassword">
             Password
           </label>
           <input
             type="password"
-            className="form-control"
+            className="form-control form-thing"
             placeholder="Password"
             name="password"
             value={password}
             onChange={this.onChange}
             required
           />
-          <button className="btn btn-lg btn-primary btn-block" type="submit">
+          <button className="btn btn-lg btn-primary btn-block form-thing1" type="submit">
             Login
           </button>
-          <p>
+          <p className="form-thing1">
             Not a member?{" "}
             <Link to="/register">
               <span
@@ -91,6 +96,7 @@ class Login extends Component {
             </Link>
           </p>
         </form>
+      </div>
       </div>
     );
   }
