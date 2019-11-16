@@ -1,11 +1,9 @@
 import React from 'react';
 import axios from "axios";
-// examples from LoanComponent.js
-// import StudentLoanForm from "./LoanForm";
-// import StudentLoanComponent from "./LoanComponent";
+
 
 import { emptyStatement } from '@babel/types';
-class ExpenseChart extends React.Component {
+class KeyMetricsChart extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -48,3 +46,5 @@ class ExpenseChart extends React.Component {
         );
     }
 }
+
+export default KeyMetricsChart;

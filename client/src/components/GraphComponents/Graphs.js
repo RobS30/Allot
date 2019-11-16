@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
-// import {Chart, Component} from 'react-google-charts';
+import "./graphs.css";
+import AmortizationChart from "./amort_time_series/studentloanamortization";
+import KeyMetricsChart from "./key_metrics/keyMetricsComponent";
 
 class GraphComponent extends React.Component {
   state = {
@@ -68,96 +70,30 @@ class GraphComponent extends React.Component {
       <>
         <div className="container">
           <div className="row">
-            <div className="col-lg-12">Graph One Goes Here
-              {/* <Component
-                initialState={{
-                  chartEditor: null,
-                  chartWrapper: null,
-                  google: null
-                }}
-              >
-                {component => {
-                  return (
-                    <div>
-                      <button
-                        onClick={() => {
-                          const {
-                            google,
-                            chartEditor,
-                            chartWrapper
-                          } = component.state;
-                          if (
-                            chartWrapper === null ||
-                            google === null ||
-                            chartEditor === null
-                          )
-                            return;
-                          chartEditor.openDialog(chartWrapper);
-                          google.visualization.events.addListener(
-                            chartEditor,
-                            "ok",
-                            () => {
-                              const newChartWrapper = chartEditor.getChartWrapper();
-                              newChartWrapper.draw();
-                              const newChartOptions = newChartWrapper.getOptions();
-                              const newChartType = newChartWrapper.getChartType();
-                              console.log(
-                                "Chart type changed to ",
-                                newChartType
-                              );
-                              console.log(
-                                "Chart options changed to ",
-                                newChartOptions
-                              );
-                            }
-                          );
-                        }}
-                      >
-                        Edit data
-                      </button>
-                      <Chart
-                        width={"600px"}
-                        height={"400px"}
-                        chartType="ScatterChart"
-                        loader={<div>Loading Chart</div>}
-                        data={[
-                          ["Age", "Weight"],
-                          [8, 12],
-                          [4, 5.5],
-                          [11, 14],
-                          [4, 5],
-                          [3, 3.5],
-                          [6.5, 7]
-                        ]}
-                        options={{
-                          title: "Age vs. Weight comparison",
-                          hAxis: { title: "Age", minValue: 0, maxValue: 15 },
-                          vAxis: { title: "Weight", minValue: 0, maxValue: 15 },
-                          legend: "none"
-                        }}
-                        rootProps={{ "data-testid": "1" }}
-                        getChartEditor={({
-                          chartEditor,
-                          chartWrapper,
-                          google
-                        }) => {
-                          component.setState({
-                            chartEditor,
-                            chartWrapper,
-                            google
-                          });
-                          console.log("Get Chart Editor");
-                        }}
-                        chartPackages={["corechart", "controls", "charteditor"]}
-                      />
-                    </div>
-                  );
-                }}
-              </Component> */}
+            <div className="col-lg-3 mr-2 graph-components">
+              
+              Key Metrics Goes here
+            
             </div>
+            <div className="col-lg-8 graph-components">
+              
+              Graph one goes here
+            
+            </div>
+
           </div>
           <div className="row">
-            <div className="col-lg-12 mt-4">Graph Two Goes Here</div>
+            <div className="col-lg-3 mr-2 mt-4 graph-components">
+              
+              Pie Chart Goes Here
+              
+              </div>
+
+              <div className="col-lg-8 mt-4 graph-components">
+              
+              <AmortizationChart />
+              
+              </div>
           </div>
         </div>
       </>
