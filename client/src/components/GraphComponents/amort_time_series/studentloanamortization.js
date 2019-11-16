@@ -84,3 +84,5 @@ class AmortizationChart extends React.Component {
     );
   }
 }
+
+export default AmortizationChartComponent;
