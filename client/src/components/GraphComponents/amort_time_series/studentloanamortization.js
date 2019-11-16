@@ -1,6 +1,7 @@
 import React from "react";
-import amort from "../../../loanamortization/index";
 import axios from 'axios';
+import Chart from 'react-google-charts';
+import {amort} from "./loanamortization/index";
 
 class AmortizationChart extends React.Component {
   constructor(props) {
@@ -25,7 +26,7 @@ class AmortizationChart extends React.Component {
       // balances
       // avg interest rate
 
-      let data = amort(res.data.balances, res.data.rate, years);
+      let data = amort(res.data.balances, res.data.rate, 20);
       this.setState({
         chartDtata: data
       });
@@ -41,7 +42,7 @@ class AmortizationChart extends React.Component {
       <div>
         <button
           onClick={() => {
-            const { google, chartEditor, chartWrapper } = component.state;
+            const { google, chartEditor, chartWrapper } = this.state;
             if (
               chartWrapper === null ||
               google === null ||
@@ -75,7 +76,7 @@ class AmortizationChart extends React.Component {
           }}
           rootProps={{ "data-testid": "1" }}
           getChartEditor={({ chartEditor, chartWrapper, google }) => {
-            component.setState({ chartEditor, chartWrapper, google });
+            this.setState({ chartEditor, chartWrapper, google });
             console.log("Get Chart Editor");
           }}
           chartPackages={["corechart", "controls", "charteditor"]}
@@ -85,4 +86,4 @@ class AmortizationChart extends React.Component {
   }
 }
 
-export default AmortizationChartComponent;
+export default AmortizationChart;
