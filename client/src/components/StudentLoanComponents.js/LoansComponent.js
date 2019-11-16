@@ -77,24 +77,35 @@ class StudentLoansComponent extends React.Component {
   render() {
     return (
       <>
-        <div className="row mt-5">
+        <div className="row">
           <div className="col-lg-12">
             <h2>Add Student Loan</h2>
-            {this.state.studentLoans.map((studentLoans, index) => {
-              return (
-                <StudentLoanComponent
-                  key={index}
-                  name={studentLoans.name}
-                  value={studentLoans.value}
-                  interest={studentLoans.interest}
-                />
-              );
-            })}
+            <div>
+              <div className="row">
+                <table className="mb-2">
+                  <tr>
+                    <th>Loan</th>
+                    <th>Amount</th>
+                    <th>Interest</th>
+                  </tr>
+                  {this.state.studentLoans.map((studentLoans, index) => {
+                    return (
+                      <StudentLoanComponent
+                        key={index}
+                        name={studentLoans.name}
+                        value={studentLoans.value}
+                        interest={studentLoans.interest}
+                      />
+                    );
+                  })}
+                </table>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <div>
-          <StudentLoanForm handleSubmit={this.handleSubmit} />
+          <div>
+            <StudentLoanForm handleSubmit={this.handleSubmit} />
+          </div>
         </div>
       </>
     );

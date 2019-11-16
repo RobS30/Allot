@@ -1,15 +1,16 @@
 import React from "react";
+import "./Income.css";
 
 class IncomeInput extends React.Component {
   render() {
     return (
-      <div>
-        <div className="row">
-          <div className="col">{this.props.name}</div>
-          <div className="col">{this.props.value}</div>
-          <div className="col">{this.props.frequency}</div>
-        </div>
-      </div>
+      <React.Fragment>
+        <tr className="table-data">
+          <td>{this.props.name}</td>
+          <td>{this.props.value}</td>
+          <td>{this.props.frequency}</td>
+        </tr>
+      </React.Fragment>
     );
   }
 }

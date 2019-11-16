@@ -79,7 +79,7 @@ class ExpenseForm extends Component {
             </Form.Control>
           </Col>
         </Row>
-        <Button className="d-flex justify-content-center" variant="primary" type="submit">
+        <Button className="d-flex justify-content-center mt-2 mb-4" variant="primary" type="submit">
           Add Expense
         </Button>
       </Form>

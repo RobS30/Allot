@@ -23,8 +23,8 @@ class IncomeForm extends Component {
     const { name, value, frequency } = this.state;
     return (
       <Form onSubmit={this.props.handleSubmit}>
-        <Row className="mb-2">
-          <Col>
+        <Row className="mb-2 mt-2">
+          <Col className="mr-1">
             <Form.Label>Income Name</Form.Label>
             <Form.Control
               size="sm"
@@ -37,7 +37,7 @@ class IncomeForm extends Component {
               required
             />
           </Col>
-          <Col>
+          <Col className="mr-1">
           <Form.Label>Amount</Form.Label>
             <Form.Control
               size="sm"
@@ -50,7 +50,7 @@ class IncomeForm extends Component {
               required
             />
           </Col>
-          <Col>
+          <Col className="mr-1">
           <Form.Label>Frequency</Form.Label>
             <Form.Control 
             size="sm" 
@@ -66,7 +66,7 @@ class IncomeForm extends Component {
             </Form.Control>
           </Col>
         </Row>
-        <Button className="d-flex justify-content-center" variant="primary" type="submit">
+        <Button className="d-flex justify-content-center mt-2" variant="primary" type="submit">
           Add Income
         </Button>
       </Form>

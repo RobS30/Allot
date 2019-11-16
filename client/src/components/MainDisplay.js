@@ -16,10 +16,10 @@ function MainDisplay(props) {
         </div>
         <div className="row">
           <div className="col-md-6">
-            Additional Information if we want will display here.
+            
           </div>
           <div className="col-md-6">
-            Additional Information if we want will display here.
+            
           </div>
         </div>
       </div>

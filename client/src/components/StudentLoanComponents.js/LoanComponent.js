@@ -3,13 +3,13 @@ import React from "react";
 class StudentLoanComponent extends React.Component {
   render() {
     return (
-      <div>
-        <div className="row">
-          <div className="col">{this.props.name}</div>
-          <div className="col">{this.props.value}</div>
-          <div className="col">{this.props.interest}</div>
-        </div>
-      </div>
+      <React.Fragment>
+        <tr className="table-data">
+          <td>{this.props.name}</td>
+          <td>{this.props.value}</td>
+          <td>{this.props.interest}</td>
+        </tr>
+      </React.Fragment>
     );
   }
 }
