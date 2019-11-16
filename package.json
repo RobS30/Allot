@@ -1,7 +1,7 @@
 {
-  "name": "mern",
+  "name": "allot",
   "version": "1.0.0",
-  "description": "Mern Demo",
+  "description": "allot budgeting",
   "main": "server.js",
   "proxy": "http://localhost:3001",
   "scripts": {
