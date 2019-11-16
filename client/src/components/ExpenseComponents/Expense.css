@@ -1,0 +1,13 @@
+div.col {
+padding: .5;
+
+}
+
+label.form-label {
+    font-size: 12px;
+}
+
+.expense-display {
+
+    border: 2px solid black;
+}

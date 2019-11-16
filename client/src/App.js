@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./App.css";
-import MainDisplay from "./components/MainDisplay"
+import MainDisplay from "./components/MainDisplay";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Nav from "./components/NavBar/Navbar";
+import Login from "./components/LoginPage/Login";
+import Footer from "./components/NavBar/Footer";
 
 class App extends Component {
   state = {
@@ -9,7 +13,6 @@ class App extends Component {
   };
 
   componentDidMount() {
-    
     let user = {};
     if (sessionStorage.getItem("user")) {
       user = JSON.parse(sessionStorage.getItem("user"));
@@ -17,7 +20,6 @@ class App extends Component {
     this.setState({
       user: user
     });
-
   }
 
   logout = () => {
@@ -29,43 +31,32 @@ class App extends Component {
   login = () => {
     sessionStorage.removeItem("jwtToken");
     sessionStorage.removeItem("user");
-    window.location.assign('/login');
+    window.location.assign("/login");
   };
 
   render() {
     return (
-      <div className="container">
-        <div className="panel panel-default">
-          <div className="panel-heading">
-            <h3 className="panel-title">
-              allot <small>is here!</small>
-              {sessionStorage.getItem("user") ? (
-                <React.Fragment>
-                  <div>
-                    <h2 className="panel-title">
-                      Welcome {this.state.user.name}
-                    </h2>
-                    <button className="btn btn-primary" onClick={this.logout}>
-                      Logout
-                    </button>
-                  </div>
-                  <MainDisplay />
-                </React.Fragment>
-              ) : (
-                <React.Fragment>
-                  <div>
-                    <h2 className="panel-title">
-                      Welcome
-                    </h2>
-                    <button className="btn btn-primary" onClick={this.login}>
-                      Login
-                    </button>
-                  </div>                  
-                </React.Fragment>
-              )}
-            </h3>
-          </div>
-        </div>
+      
+  
+      
+      <div className="main-body-app">
+        
+        <Nav />
+        
+          {sessionStorage.getItem("user") ? (
+            <>
+            <MainDisplay />
+            
+            <Footer />
+            </>
+            
+          ) : (
+<>
+            <Login />
+            
+            </>
+          )}
+
       </div>
     );
   }

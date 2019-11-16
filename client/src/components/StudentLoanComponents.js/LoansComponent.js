@@ -1,15 +1,17 @@
 import React from "react";
 import axios from "axios";
-import IncomeComponent from "./IncomeComponent";
-import IncomeForm from "./IncomeForm";
+import StudentLoanForm from "./LoanForm";
+import StudentLoanComponent from "./LoanComponent";
+import "./studentloan.css";
 
-class IncomesComponent extends React.Component {
+
+class StudentLoansComponent extends React.Component {
   _isMounted = false;
 
   constructor(props) {
     super(props);
     this.state = {
-      incomes: []
+      studentLoans: []
     };
   }
 
@@ -23,11 +25,11 @@ class IncomesComponent extends React.Component {
     axios.defaults.headers.common["Authorization"] = sessionStorage.getItem(
       "jwtToken"
     );
-    axios.get("/api/incomes/" + user.id).then(res => {
+    axios.get("/api/studentLoans/" + user.id).then(res => {
       if (this._isMounted && Array.isArray(res.data)) {
-        console.log("incomes:", res.data);
+        console.log("studentLoans:", res.data);
         this.setState({
-          incomes: res.data
+          studentLoans: res.data
         });
       }
     });
@@ -40,27 +42,27 @@ class IncomesComponent extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    const { name, value, category, frequency } = e.target;
+    const { name, value, interest, } = e.target;
 
     let user = {};
     if (sessionStorage.getItem("user")) {
       user = JSON.parse(sessionStorage.getItem("user"));
     }
-    const income = {
+    const studentLoans = {
       name: name.value,
       value: value.value,
-      frequency: frequency.value,
+      interest: interest.value,
       id: user.id
     };
     axios.defaults.headers.common["Authorization"] = sessionStorage.getItem(
       "jwtToken"
     );
     axios
-      .post("/api/incomes", income)
+      .post("/api/studentLoans", studentLoans)
       .then(res => {
         if (this._isMounted && Array.isArray(res.data)) {
           this.setState({
-            incomes: res.data
+            studentLoans: res.data
           });
         }
       })
@@ -77,14 +79,14 @@ class IncomesComponent extends React.Component {
       <>
         <div className="row mt-5">
           <div className="col-lg-12">
-            <h2>Add Income Sources</h2>
-            {this.state.incomes.map((income, index) => {
+            <h2>Add Student Loan</h2>
+            {this.state.studentLoans.map((studentLoans, index) => {
               return (
-                <IncomeComponent
+                <StudentLoanComponent
                   key={index}
-                  name={income.name}
-                  value={income.value}
-                  frequency={income.frequency}
+                  name={studentLoans.name}
+                  value={studentLoans.value}
+                  interest={studentLoans.interest}
                 />
               );
             })}
@@ -92,11 +94,11 @@ class IncomesComponent extends React.Component {
         </div>
 
         <div>
-          <IncomeForm handleSubmit={this.handleSubmit} />
+          <StudentLoanForm handleSubmit={this.handleSubmit} />
         </div>
       </>
     );
   }
 }
 
-export default IncomesComponent;
+export default StudentLoansComponent;

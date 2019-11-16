@@ -1,0 +1,26 @@
+.myNav {
+
+margin: 0 10%;
+
+}
+
+.navBrand {
+    text-transform: lowercase;
+    font-size: 200%;
+}
+
+.this-user-name {
+color: white;
+}
+.navBtn {
+background-color: rgb(32, 32, 32, .9);
+color: white;
+border-color: white;
+vertical-align: middle;
+
+}
+
+.debt-text{
+font-size: 80%;
+
+}

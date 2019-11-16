@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Form, Row, Col, Button } from "react-bootstrap";
-import "./Income.css";
 
-class IncomeForm extends Component {
+
+class StudentLoanForm extends Component {
   constructor() {
     super();
     this.state = {
       name: "",
       value: "",
-      frequency: "",
-      incomes: []
+      interest: "",
+      studentLoans: []
     };
   }
   onChange = e => {
@@ -20,12 +20,12 @@ class IncomeForm extends Component {
   };
 
   render() {
-    const { name, value, frequency } = this.state;
+    const { name, value, interest } = this.state;
     return (
       <Form onSubmit={this.props.handleSubmit}>
         <Row className="mb-2">
           <Col>
-            <Form.Label>Income Name</Form.Label>
+            <Form.Label>Loan Name</Form.Label>
             <Form.Control
               size="sm"
               type="text"
@@ -51,27 +51,27 @@ class IncomeForm extends Component {
             />
           </Col>
           <Col>
-          <Form.Label>Frequency</Form.Label>
+          <Form.Label>Interest</Form.Label>
             <Form.Control 
-            size="sm" 
-            as="select"
-            value={frequency} 
-            onChange={this.onChange}
-            name="frequency"
-            id="sel1">
-              <option value="monthly">Monthly</option>
-              <option value="bi-monthly">Bi-Monthly</option>
-              <option value="annual">Annual</option>
-              <option value="semi-annual"> Semi-Annual</option>
-            </Form.Control>
+           size="sm"
+           type="text"
+           className="form-control"
+           placeholder="12"
+           name="interest"
+           value={interest}
+           onChange={this.onChange}
+           required
+         
+          />
+            
           </Col>
         </Row>
         <Button className="d-flex justify-content-center" variant="primary" type="submit">
-          Add Income
+          Add Loan
         </Button>
       </Form>
     );
   }
 }
 
-export default IncomeForm;
+export default StudentLoanForm;

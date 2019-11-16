@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import axios from "axios";
 import { Link } from "react-router-dom";
+import { Form, Row, Col, Button } from "react-bootstrap";
+import "./Expense.css";
 
 class ExpenseForm extends Component {
   constructor() {
@@ -23,66 +23,66 @@ class ExpenseForm extends Component {
   render() {
     const { name, value, category, frequency } = this.state;
     return (
-      <div className="container">
-        <form className="form-inline" onSubmit={this.props.handleSubmit}>
-          <h3 className="form-signin-heading">Add Expense</h3>
-          <label htmlFor="inputName" className="sr-only">
-            Name
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Expense Name"
-            name="name"
-            value={name}
-            onChange={this.onChange}
-            required
-          />
-          <label htmlFor="inputAmount" className="sr-only">
-            Expense Amount
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Expense Amount"
-            name="value"
-            value={value}
-            onChange={this.onChange}
-            required
-          />
-          <label htmlFor="inputCategory" className="sr-only">
-            Category
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Expense Category"
-            name="category"
-            value={category}
-            onChange={this.onChange}
-            required
-          />
-          <label htmlFor="inputFrequency" className="sr-only">
-            Frequency
-          </label>
-          
-            <select 
-            value={frequency} 
-            onChange={this.onChange}
-            name="frequency"
-            className="form-control" id="sel1">
+      <Form className="mt-2" onSubmit={this.props.handleSubmit}>
+        <Row className="mb-2">
+          <Col className="mr-1">
+            <Form.Label>Expense</Form.Label>
+            <Form.Control
+              size="sm"
+              type="text"
+              className="form-control"
+              placeholder="Loan"
+              name="name"
+              value={name}
+              onChange={this.onChange}
+              required
+            />
+          </Col>
+          <Col className="mr-1">
+          <Form.Label>Amount</Form.Label>
+            <Form.Control
+              size="sm"
+              type="text"
+              className="form-control"
+              placeholder="$4,000"
+              name="value"
+              value={value}
+              onChange={this.onChange}
+              required
+            />
+          </Col>
+          <Col className="mr-1">
+          <Form.Label>Category</Form.Label>
+            <Form.Control
+              size="sm"
+              type="text"
+              className="form-control"
+              placeholder="School"
+              name="category"
+              value={category}
+              onChange={this.onChange}
+              required
+            />
+          </Col>
+          <Col className="mr-1">
+          <Form.Label htmlFor="inputFrequency" >Frequency</Form.Label>
+            <Form.Control size="sm" as="select"
+             value={frequency} 
+             onChange={this.onChange}
+             name="frequency"
+             id="sel1"
+            >
               <option value="monthly">Monthly</option>
               <option value="bi-monthly">Bi-Monthly</option>
               <option value="annual">Annual</option>
               <option value="semi-annual"> Semi-Annual</option>
-      
-            </select>
-          
-          <button className="btn btn-lg btn-primary btn-block" type="submit">
-            +
-          </button>
-        </form>
-      </div>
+            </Form.Control>
+          </Col>
+        </Row>
+        <Button className="d-flex justify-content-center" variant="primary" type="submit">
+          Add Expense
+        </Button>
+      </Form>
     );
   }
 }
