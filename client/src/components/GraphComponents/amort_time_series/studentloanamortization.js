@@ -13,11 +13,18 @@ class AmortizationChart extends React.Component {
   }
 
   componentDidMount() {
-    
-    axios.get('/api/studentLoans' + id).then(function(res){
+
+    let user = {};
+    if (sessionStorage.getItem("user")) {
+      user = JSON.parse(sessionStorage.getItem("user"));
+    }
+    axios.defaults.headers.common["Authorization"] = sessionStorage.getItem(
+      "jwtToken"
+    );
+    axios.get('/api/studentLoans' + user.id).then(function (res) {
       // balances
       // avg interest rate
-      
+
       let data = amort(res.data.balances, res.data.rate, years);
       this.setState({
         chartDtata: data
