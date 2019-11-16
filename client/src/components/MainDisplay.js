@@ -5,7 +5,7 @@ import GraphComponent from "./GraphComponents/Graphs";
 function MainDisplay(props) {
   return (
     <div className="main-display">
-      <div className="container mt-4">
+      <div className="container-fluid mt-4 ml-2">
         <div className="row">
           <div className="col-lg-4">
             <ExpenseIncomeDisplay />
