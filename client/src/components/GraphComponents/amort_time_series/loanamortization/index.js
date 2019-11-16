@@ -1,5 +1,7 @@
 "use strict";
 
+import { Module } from "module";
+
 var Mortgage = require("./mortgage");
 
 // var amount = 30000;
@@ -7,7 +9,7 @@ var Mortgage = require("./mortgage");
 // var years = 10;
 var afterMonths = 6;
 
-export function amort(amount, interest, years) {
+export function amort (amount, interest, years) {
   var mortgage = new Mortgage(amount, interest, years);
   var payment = mortgage.fixedMonthlyPayment();
   var remaining = mortgage.remainingLoanBalance(afterMonths);
@@ -27,5 +29,6 @@ export function amort(amount, interest, years) {
   
   return temp;
 }
+
 
 //amort(26000, 0.055, 6);
