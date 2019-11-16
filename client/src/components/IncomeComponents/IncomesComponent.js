@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import IncomeComponent from "./IncomeComponent";
 import IncomeForm from "./IncomeForm";
+import "./Income.css";
 
 class IncomesComponent extends React.Component {
   _isMounted = false;
@@ -75,24 +76,36 @@ class IncomesComponent extends React.Component {
   render() {
     return (
       <>
-        <div className="row mt-5">
+        <div className="row">
           <div className="col-lg-12">
-            <h2>Add Income Sources</h2>
-            {this.state.incomes.map((income, index) => {
-              return (
-                <IncomeComponent
-                  key={index}
-                  name={income.name}
-                  value={income.value}
-                  frequency={income.frequency}
-                />
-              );
-            })}
+            <h2>Add Income</h2>
+            <div>
+              <div className="row">
+                <table>
+                  <tr>
+                    <th>Income</th>
+                    <th>Amount</th>
+                    <th>Frequency</th>
+                  </tr>
+                  {this.state.incomes.map((income, index) => {
+                    return (
+                      <IncomeComponent
+                        key={index}
+                        name={income.name}
+                        category={income.category}
+                        value={income.value}
+                        frequency={income.frequency}
+                      />
+                    );
+                  })}
+                </table>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <div>
-          <IncomeForm handleSubmit={this.handleSubmit} />
+          <div>
+            <IncomeForm handleSubmit={this.handleSubmit} />
+          </div>
         </div>
       </>
     );

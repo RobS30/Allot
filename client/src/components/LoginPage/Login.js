@@ -47,56 +47,58 @@ class Login extends Component {
     const { email, password, message } = this.state;
     return (
       <div className="main-body-reg">
-      <div className="container">
-        <div>
-          <h1 className="main-title">allot</h1>
+        <div className="container">
+          <div>
+            <h1 className="main-title">allot</h1>
+          </div>
+          <form className="form-signin" onSubmit={this.onSubmit}>
+            {message !== "" && (
+              <div
+                className="alert alert-warning alert-dismissible"
+                role="alert"
+              >
+                {message}
+              </div>
+            )}
+            <h2 className="form-signin-heading form-thing">Please Sign In</h2>
+            <label htmlFor="inputEmail">Email address</label>
+            <input
+              type="email"
+              className="form-control form-thing1"
+              placeholder="Email address"
+              name="email"
+              value={email}
+              onChange={this.onChange}
+              required
+            />
+            <label htmlFor="inputPassword">Password</label>
+            <input
+              type="password"
+              className="form-control form-thing"
+              placeholder="Password"
+              name="password"
+              value={password}
+              onChange={this.onChange}
+              required
+            />
+            <button
+              className="btn btn-lg btn-primary btn-block form-thing1"
+              type="submit"
+            >
+              Login
+            </button>
+            <p className="form-thing1">
+              Not a member?{" "}
+              <Link to="/register">
+                <span
+                  className="glyphicon glyphicon-plus-sign"
+                  aria-hidden="true"
+                ></span>{" "}
+                Register here
+              </Link>
+            </p>
+          </form>
         </div>
-        <form className="form-signin" onSubmit={this.onSubmit}>
-          {message !== "" && (
-            <div className="alert alert-warning alert-dismissible" role="alert">
-              {message}
-            </div>
-          )}
-          <h2 className="form-signin-heading form-thing">Please Sign In</h2>
-          <label htmlFor="inputEmail">
-            Email address
-          </label>
-          <input
-            type="email"
-            className="form-control form-thing1"
-            placeholder="Email address"
-            name="email"
-            value={email}
-            onChange={this.onChange}
-            required
-          />
-          <label htmlFor="inputPassword">
-            Password
-          </label>
-          <input
-            type="password"
-            className="form-control form-thing"
-            placeholder="Password"
-            name="password"
-            value={password}
-            onChange={this.onChange}
-            required
-          />
-          <button className="btn btn-lg btn-primary btn-block form-thing1" type="submit">
-            Login
-          </button>
-          <p className="form-thing1">
-            Not a member?{" "}
-            <Link to="/register">
-              <span
-                className="glyphicon glyphicon-plus-sign"
-                aria-hidden="true"
-              ></span>{" "}
-              Register here
-            </Link>
-          </p>
-        </form>
-      </div>
       </div>
     );
   }

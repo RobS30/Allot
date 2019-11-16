@@ -80,24 +80,35 @@ class ExpensesComponent extends React.Component {
       <>
         <div className="row">
           <div className="col-lg-12">
-          <h2>Add Expenses</h2>
-            {this.state.expenses.map((expense, index) => {
-              return (
-                
-                <ExpenseComponent
-                  key={index}
-                  name={expense.name}
-                  category={expense.category}
-                  value={expense.value}
-                  frequency={expense.frequency}
-                />
-              );
-            })}
+            <h2>Add Expenses</h2>
+            <div>
+              <div className="row">
+                <table className="expense-table">
+                  <tr>
+                    <th>Expense</th>
+                    <th>Amount</th>
+                    <th>Category</th>
+                    <th>Frequency</th>
+                  </tr>
+                  {this.state.expenses.map((expense, index) => {
+                    return (
+                      <ExpenseComponent
+                        key={index}
+                        name={expense.name}
+                        category={expense.category}
+                        value={expense.value}
+                        frequency={expense.frequency}
+                      />
+                    );
+                  })}
+                </table>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <div>
-          <ExpenseForm handleSubmit={this.handleSubmit} />
+          <div>
+            <ExpenseForm handleSubmit={this.handleSubmit} />
+          </div>
         </div>
       </>
     );

@@ -21,7 +21,7 @@ class ExpenseIncomeDisplay extends React.Component {
           </div>
         </div>
 
-        <div className="container student-loan-display">
+        <div className="student-loan-display mt-4 mb-5">
           <div className="row">
             <div className="col-lg-12">
               <StudentLoansComponent />
