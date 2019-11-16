@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Form, Row, Col, Button } from "react-bootstrap";
 
-
 class StudentLoanForm extends Component {
   constructor() {
     super();
@@ -38,7 +37,7 @@ class StudentLoanForm extends Component {
             />
           </Col>
           <Col className="mr-1">
-          <Form.Label>Amount</Form.Label>
+            <Form.Label>Amount</Form.Label>
             <Form.Control
               size="sm"
               type="text"
@@ -51,22 +50,24 @@ class StudentLoanForm extends Component {
             />
           </Col>
           <Col className="mr-1">
-          <Form.Label>Interest</Form.Label>
-            <Form.Control 
-           size="sm"
-           type="text"
-           className="form-control"
-           placeholder="12"
-           name="interest"
-           value={interest}
-           onChange={this.onChange}
-           required
-         
-          />
-            
+            <Form.Label>Interest</Form.Label>
+            <Form.Control
+              size="sm"
+              type="text"
+              className="form-control"
+              placeholder="12"
+              name="interest"
+              value={interest}
+              onChange={this.onChange}
+              required
+            />
           </Col>
         </Row>
-        <Button className="d-flex justify-content-center" variant="primary" type="submit">
+        <Button
+          className="d-flex justify-content-center"
+          variant="primary"
+          type="submit"
+        >
           Add Loan
         </Button>
       </Form>

@@ -42,7 +42,9 @@ class Create extends Component {
         <div className="container">
           <form className="form-signin" onSubmit={this.onSubmit}>
             <h2 className="form-signin-heading form-thing">Register</h2>
-            <label htmlFor="inputName" className="form-thing1">Name</label>
+            <label htmlFor="inputName" className="form-thing1">
+              Name
+            </label>
             <input
               type="text"
               className="form-control form-thing1"
@@ -52,7 +54,9 @@ class Create extends Component {
               onChange={this.onChange}
               required
             />
-            <label htmlFor="inputEmail" className="form-thing1">Email address</label>
+            <label htmlFor="inputEmail" className="form-thing1">
+              Email address
+            </label>
             <input
               type="email"
               className="form-control form-thing1"
@@ -85,7 +89,10 @@ class Create extends Component {
               value={college}
               onChange={this.onChange}
             />
-            <button className="btn btn-lg btn-primary btn-block form-thing1" type="submit">
+            <button
+              className="btn btn-lg btn-primary btn-block form-thing1"
+              type="submit"
+            >
               Register
             </button>
           </form>

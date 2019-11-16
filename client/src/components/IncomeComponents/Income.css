@@ -1,34 +1,32 @@
 div.col {
-    padding: 0;
-    
-    }
-    
-    label.form-label {
-        font-size: 12px;
-    }
+  padding: 0;
+}
 
-    table {
-        font-family: arial, sans-serif;
-        border-collapse: collapse;
-        width: 100%;
-      }
-      
-      th {
-        border: 1px solid #888888;
-        text-align: center;
-        padding: 8px;
-        background-color: #4d58ff;
-        color: white;
-      }
-      
-      tr:nth-child(even) {
-        background-color: #ffffff;
-        color: black;
-      }
-    
-      td {
-        border: 1px solid #888888;
-        text-align: center;
-        padding: 8px;
-    
-      }
+label.form-label {
+  font-size: 12px;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th {
+  border: 1px solid #888888;
+  text-align: center;
+  padding: 8px;
+  background-color: #4d58ff;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #ffffff;
+  color: black;
+}
+
+td {
+  border: 1px solid #888888;
+  text-align: center;
+  padding: 8px;
+}

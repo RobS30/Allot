@@ -1,11 +1,11 @@
 .income-expense-display {
-padding: 10%;
-box-shadow: 0 4px 8px 0 rgba(228, 228, 228, 0.2), 0 6px 20px 0 rgba(228, 228, 228, 0.19);
+  padding: 10%;
+  box-shadow: 0 4px 8px 0 rgba(228, 228, 228, 0.2),
+    0 6px 20px 0 rgba(228, 228, 228, 0.19);
 }
 
 .student-loan-display {
-    padding: 10%;
-    box-shadow: 0 4px 8px 0 rgba(228, 228, 228, 0.2), 0 6px 20px 0 rgba(228, 228, 228, 0.19);
-    
-
-    }
+  padding: 10%;
+  box-shadow: 0 4px 8px 0 rgba(228, 228, 228, 0.2),
+    0 6px 20px 0 rgba(228, 228, 228, 0.19);
+}

@@ -1,40 +1,36 @@
 div.col {
-padding: .5;
-
+  padding: 0.5;
 }
 
-
 label.form-label {
-    font-size: 12px;
+  font-size: 12px;
 }
 
 .expense-display {
-
-    border: 2px solid black;
+  border: 2px solid black;
 }
 
 table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  th {
-    border: 1px solid #888888;
-    text-align: center;
-    padding: 8px;
-    background-color: #4d58ff;
-    color: white;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #ffffff;
-    color: black;
-  }
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
 
-  td {
-    border: 1px solid #888888;
-    text-align: center;
-    padding: 8px;
-    
-  }
+th {
+  border: 1px solid #888888;
+  text-align: center;
+  padding: 8px;
+  background-color: #4d58ff;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #ffffff;
+  color: black;
+}
+
+td {
+  border: 1px solid #888888;
+  text-align: center;
+  padding: 8px;
+}

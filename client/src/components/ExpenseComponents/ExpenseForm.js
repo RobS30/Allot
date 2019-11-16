@@ -39,7 +39,7 @@ class ExpenseForm extends Component {
             />
           </Col>
           <Col className="mr-1">
-          <Form.Label>Amount</Form.Label>
+            <Form.Label>Amount</Form.Label>
             <Form.Control
               size="sm"
               type="text"
@@ -52,7 +52,7 @@ class ExpenseForm extends Component {
             />
           </Col>
           <Col className="mr-1">
-          <Form.Label>Category</Form.Label>
+            <Form.Label>Category</Form.Label>
             <Form.Control
               size="sm"
               type="text"
@@ -65,12 +65,14 @@ class ExpenseForm extends Component {
             />
           </Col>
           <Col className="mr-1">
-          <Form.Label htmlFor="inputFrequency" >Frequency</Form.Label>
-            <Form.Control size="sm" as="select"
-             value={frequency} 
-             onChange={this.onChange}
-             name="frequency"
-             id="sel1"
+            <Form.Label htmlFor="inputFrequency">Frequency</Form.Label>
+            <Form.Control
+              size="sm"
+              as="select"
+              value={frequency}
+              onChange={this.onChange}
+              name="frequency"
+              id="sel1"
             >
               <option value="monthly">Monthly</option>
               <option value="bi-monthly">Bi-Monthly</option>
@@ -79,7 +81,11 @@ class ExpenseForm extends Component {
             </Form.Control>
           </Col>
         </Row>
-        <Button className="d-flex justify-content-center mt-2 mb-4" variant="primary" type="submit">
+        <Button
+          className="d-flex justify-content-center mt-2 mb-4"
+          variant="primary"
+          type="submit"
+        >
           Add Expense
         </Button>
       </Form>

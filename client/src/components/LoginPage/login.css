@@ -1,47 +1,37 @@
-
-
 .main-title {
-    margin: 0 20%;
-    text-align: center;
-    padding-bottom: 10vh;
-    font-size: 400%;
-
+  margin: 0 20%;
+  text-align: center;
+  padding-bottom: 10vh;
+  font-size: 400%;
 }
 
 .container {
-max-height: 130vh;
-height: 130vh;
-width: 60%;
-padding-top: 10vh;
-
+  max-height: 130vh;
+  height: 130vh;
+  width: 60%;
+  padding-top: 10vh;
 }
 
 .form-signin-heading {
-
-text-align: center;
-
+  text-align: center;
 }
 
 .form-signin {
-    margin: 0 25%;
-    box-shadow: 0 4px 8px 0 rgba(228, 228, 228, 0.2), 0 6px 20px 0 rgba(228, 228, 228, 0.19);
-    padding: 5%;
-    width: 50%;
-    
+  margin: 0 25%;
+  box-shadow: 0 4px 8px 0 rgba(228, 228, 228, 0.2),
+    0 6px 20px 0 rgba(228, 228, 228, 0.19);
+  padding: 5%;
+  width: 50%;
 }
 
 .form-thing {
-margin-bottom: 4vh;
-
+  margin-bottom: 4vh;
 }
 
 label {
-    color: white;
+  color: white;
 }
 
 .form-thing1 {
-    margin-bottom: 1vh;
+  margin-bottom: 1vh;
 }
-
-
-

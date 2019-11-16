@@ -1,26 +1,22 @@
 .myNav {
-
-margin: 0 10%;
-
+  margin: 0 10%;
 }
 
 .navBrand {
-    text-transform: lowercase;
-    font-size: 200%;
+  text-transform: lowercase;
+  font-size: 200%;
 }
 
 .this-user-name {
-color: white;
+  color: white;
 }
 .navBtn {
-background-color: rgb(32, 32, 32, .9);
-color: white;
-border-color: white;
-vertical-align: middle;
-
+  background-color: rgb(32, 32, 32, 0.9);
+  color: white;
+  border-color: white;
+  vertical-align: middle;
 }
 
-.debt-text{
-font-size: 80%;
-
+.debt-text {
+  font-size: 80%;
 }

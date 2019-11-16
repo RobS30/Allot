@@ -38,7 +38,7 @@ class IncomeForm extends Component {
             />
           </Col>
           <Col className="mr-1">
-          <Form.Label>Amount</Form.Label>
+            <Form.Label>Amount</Form.Label>
             <Form.Control
               size="sm"
               type="text"
@@ -51,14 +51,15 @@ class IncomeForm extends Component {
             />
           </Col>
           <Col className="mr-1">
-          <Form.Label>Frequency</Form.Label>
-            <Form.Control 
-            size="sm" 
-            as="select"
-            value={frequency} 
-            onChange={this.onChange}
-            name="frequency"
-            id="sel1">
+            <Form.Label>Frequency</Form.Label>
+            <Form.Control
+              size="sm"
+              as="select"
+              value={frequency}
+              onChange={this.onChange}
+              name="frequency"
+              id="sel1"
+            >
               <option value="monthly">Monthly</option>
               <option value="bi-monthly">Bi-Monthly</option>
               <option value="annual">Annual</option>
@@ -66,7 +67,11 @@ class IncomeForm extends Component {
             </Form.Control>
           </Col>
         </Row>
-        <Button className="d-flex justify-content-center mt-2" variant="primary" type="submit">
+        <Button
+          className="d-flex justify-content-center mt-2"
+          variant="primary"
+          type="submit"
+        >
           Add Income
         </Button>
       </Form>

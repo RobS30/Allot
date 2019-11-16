@@ -4,7 +4,6 @@ import StudentLoanForm from "./LoanForm";
 import StudentLoanComponent from "./LoanComponent";
 import "./studentloan.css";
 
-
 class StudentLoansComponent extends React.Component {
   _isMounted = false;
 
@@ -42,7 +41,7 @@ class StudentLoansComponent extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    const { name, value, interest, } = e.target;
+    const { name, value, interest } = e.target;
 
     let user = {};
     if (sessionStorage.getItem("user")) {

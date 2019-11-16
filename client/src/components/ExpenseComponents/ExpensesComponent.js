@@ -101,10 +101,8 @@ class ExpensesComponent extends React.Component {
                       />
                     );
                   })}
-                  
                 </table>
               </div>
-
             </div>
           </div>
 
