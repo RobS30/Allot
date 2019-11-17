@@ -81,12 +81,13 @@ class StudentLoansComponent extends React.Component {
             <h2>Add Student Loan</h2>
             <div>
               <div className="row">
-                <table className="mb-2">
+                <table className="mb-2 loan-table">
                   <thead>
                     <tr>
                       <th>Loan</th>
                       <th>Amount</th>
                       <th>Interest</th>
+                      <th>Remove</th>
                     </tr>
                   </thead>
                   {this.state.studentLoans.map((studentLoans, index) => {
