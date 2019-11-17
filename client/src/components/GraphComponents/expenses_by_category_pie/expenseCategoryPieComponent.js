@@ -43,8 +43,8 @@ class ExpenseCategoryPie extends React.Component {
       <div>
 
         <Chart
-          width={'300px'}
-          height={'300px'}
+          width={'100%'}
+          height={'100%'}
           chartType="PieChart"
           loader={<div>Loading Chart</div>}
           data={this.state.chartData}

@@ -4,7 +4,7 @@ import "./graphs.css";
 import AmortizationChart from "./amort_time_series/studentloanamortization";
 import KeyMetricsChart from "./key_metrics/keyMetricsComponent";
 import ExpenseCategoryPie from "./expenses_by_category_pie/expenseCategoryPieComponent";
-import NetIncomeBarComponent from './net_income/netincomecomponent';
+import NetIncomeBarComponent from "./net_income/netincomecomponent";
 
 class GraphComponent extends React.Component {
   state = {
@@ -12,9 +12,7 @@ class GraphComponent extends React.Component {
     expenses: []
   };
 
-  componentDidMount() {
-    
-  }
+  componentDidMount() {}
 
   handleSubmit = e => {
     e.preventDefault();
@@ -56,32 +54,25 @@ class GraphComponent extends React.Component {
       <>
         <div className="container graphs-display mb-2">
           <div className="row">
-            <div className="col-lg-3 mr-4 graph-components">
-              
+            <div className="col-lg-3 mr-4 graph-components d-flex justify-content-center">
               <KeyMetricsChart />
-            
             </div>
-            <div className="col-lg-8 graph-components">
-              
-            <NetIncomeBarComponent />
-            
+            <div className="col-lg-8 graph-components d-flex justify-content-center">
+              <ExpenseCategoryPie />
             </div>
-
           </div>
           <div className="row">
-            <div className="col-lg-12 mt-4 graph-components">
-              
-              <ExpenseCategoryPie />
-              
+            <div className="col-lg-11 mt-4 graph-components d-flex justify-content-center">
+              <NetIncomeBarComponent />
+            </div>
+            </div>
+            <div className="row">
+              <div className="col-lg-11 mt-4 graph-components d-flex justify-content-center mb-4">
+                <AmortizationChart />
               </div>
-              <div className="row ml-1">
-              <div className="col-lg-12 mt-4 graph-components">
-              
-              <AmortizationChart />
-              </div>
-              </div>
+            </div>
           </div>
-        </div>
+        
       </>
     );
   }

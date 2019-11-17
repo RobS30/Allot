@@ -41,8 +41,8 @@ class AmortizationChart extends React.Component {
     return (
       <div>
         <Chart
-          width={"700px"}
-          height={"500px"}
+          width={"100%"}
+          height={"100%"}
           chartType="ScatterChart"
           loader={<div>Loading Chart</div>}
           data={this.state.chartDtata}
