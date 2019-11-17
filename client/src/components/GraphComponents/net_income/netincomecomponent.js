@@ -37,8 +37,8 @@ class NetIncomeBarComponent extends React.Component {
     return (
       <div>
         <Chart
-          width={'500px'}
-          height={'300px'}
+          width={'120%'}
+          height={'120%'}
           chartType="BarChart"
           loader={<div>Loading Chart</div>}
           data={this.state.chartData

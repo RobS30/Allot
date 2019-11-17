@@ -37,7 +37,7 @@ class KeyMetricsChart extends React.Component {
     }
     render() {
         return (
-            <>
+            <div className="key-metrics">
                 <h3 className="key-title">Networth: </h3>
                 <p>${this.state.networth}</p>
                 <h3 className="key-title">Total income: </h3>
@@ -47,7 +47,7 @@ class KeyMetricsChart extends React.Component {
                 <h3 className="key-title">Total Interest: </h3>
                 <p>{this.state.totalInterest}%</p>
 
-            </>
+            </div>
         );
     }
 }
