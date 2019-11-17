@@ -7,6 +7,7 @@ import Nav from "./components/NavBar/Navbar";
 import Login from "./components/LoginPage/Login";
 
 
+
 class App extends Component {
   state = {
     user: {}

@@ -67,16 +67,16 @@ class GraphComponent extends React.Component {
 
           </div>
           <div className="row">
-            <div className="col-lg-3 mr-4 mt-4 graph-components">
+            <div className="col-lg-12 mt-4 graph-components">
               
               Pie Chart Goes Here
               
               </div>
-
-              <div className="col-lg-8 mt-4 graph-components">
+              <div className="row ml-1">
+              <div className="col-lg-12 mt-4 graph-components">
               
               <AmortizationChart />
-              
+              </div>
               </div>
           </div>
         </div>
