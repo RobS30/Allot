@@ -370,11 +370,11 @@ module.exports = function (app) {
             let networth = 0;
             let totalExpenses = 0;
             for (let i = 0; i < dbUser.expenses.length; i++) {
-              totalExpenses += dbUser.expenses[i];
+              totalExpenses += dbUser.expenses[i].value;
             }
             let totalIncome = 0;
             for (let i = 0; i < dbUser.incomes.length; i++) {
-              totalIncome += dbUser.incomes[i];
+              totalIncome += dbUser.incomes[i].value;
             }
             let totalLoans = 0;
             for (let i = 0; i < dbUser.studentLoans.length; i++) {
