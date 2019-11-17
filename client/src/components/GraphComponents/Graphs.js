@@ -9,23 +9,7 @@ class GraphComponent extends React.Component {
   };
 
   componentDidMount() {
-    let user = {};
-    if (localStorage.getItem("user")) {
-      user = JSON.parse(localStorage.getItem("user"));
-    }
-    axios.get("/api/expenes/" + user.email).then(res => {
-      console.log(res.data.length);
-      this.setState({
-        expenses: res.data
-      });
-    });
-
-    axios.get("/api/incomes/" + user.email).then(res => {
-      console.log(res.data.length);
-      this.setState({
-        incomes: res.data
-      });
-    });
+    
   }
 
   handleSubmit = e => {
