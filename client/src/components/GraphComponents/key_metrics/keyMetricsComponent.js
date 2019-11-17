@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from "axios";
+import "./keymetrics.css";
 
 
 import { emptyStatement } from '@babel/types';
@@ -37,10 +38,14 @@ class KeyMetricsChart extends React.Component {
     render() {
         return (
             <>
-                <p>Networth: {this.state.networth}</p>
-                <p>Total income: {this.state.totalIncome}</p>
-                <p>Total Expenses: {this.state.totalExpenses}</p>
-                <p>Total Interest: {this.state.totalInterest}</p>
+                <h3 className="key-title">Networth: </h3>
+                <p>${this.state.networth}</p>
+                <h3 className="key-title">Total income: </h3>
+                <p>${this.state.totalIncome}</p>
+                <h3 className="key-title">Total Expenses: </h3>
+                <p>${this.state.totalExpenses}</p>
+                <h3 className="key-title">Total Interest: </h3>
+                <p>${this.state.totalInterest}</p>
 
             </>
         );
