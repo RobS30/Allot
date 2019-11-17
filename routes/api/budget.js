@@ -5,27 +5,162 @@ const Expense = require("../../models/Expense");
 const Income = require("../../models/Income");
 const StudentLoans = require("../../models/StudentLoans");
 require("../../config/passport")(passport);
+const Mortgage = require("../../client/src/loanamortization/mortgage");
 
-module.exports = function(app) {
-  
+module.exports = function (app) {
+
   ///////////////////////////////
   // get expenses
   app.get(
     "/api/expenses/:id",
     passport.authenticate("jwt", { session: false }),
-    function(req, res) {
+    function (req, res) {
       let token = getToken(req.headers);
       if (token) {
         User.findById(req.params.id)
           .populate("expenses")
-          .then(function(dbUser) {
-            console.log({dbUser})
+          .then(function (dbUser) {
+            console.log('23', dbUser.expenses)
             // If able to successfully find and associate all Users and Notes, send them back to the client
             res.json(dbUser.expenses);
           })
-          .catch(function(err) {
+          .catch(function (err) {
             // If an error occurs, send it back to the client
-            console.log({ err });
+            console.log('29', { err });
+            res.json(err);
+          });
+      } else {
+        return res.status(403).send({ success: false, msg: "Unauthorized." });
+      }
+    }
+  );
+  ////////////////////////
+  // get chart
+  app.get(
+    "/api/expensechart/:id",
+    passport.authenticate("jwt", { session: false }),
+    function (req, res) {
+      let token = getToken(req.headers);
+      if (token) {
+        User.findById(req.params.id)
+          .populate("expenses")
+          .then(function (dbUser) {
+            console.log('48', dbUser.expenses)
+            // If able to successfully find and associate all Users and Notes, send them back to the client
+            let temp = [['Expense', '%']];
+            let totalExpenses = 0;
+            for (let i = 0; i < dbUser.expenses.length; i++) {
+              totalExpenses += dbUser.expenses[i].value;
+            }
+            if (totalExpenses > 0) {
+              let expenseList = dbUser.expenses.map(function (expense) {
+                return [expense.name, ((expense.value / totalExpenses) * 100).toFixed(2)];
+              });
+              temp.push(expenseList);
+              res.json(temp);
+            } else {
+              res.json([]);
+            }
+          })
+          .catch(function (err) {
+            // If an error occurs, send it back to the client
+            console.log('29', { err });
+            res.json(err);
+          });
+      } else {
+        return res.status(403).send({ success: false, msg: "Unauthorized." });
+      }
+    }
+  );
+  ///////////////////////////////
+  // get cashflow
+  app.get(
+    "/api/cashflow/:id",
+    passport.authenticate("jwt", { session: false }),
+    function (req, res) {
+      let token = getToken(req.headers);
+      if (token) {
+        User.findById(req.params.id)
+          .populate("expenses incomes")
+          .then(function (dbUser) {
+
+            // get current month
+            let m = new Date().getMonth();
+            // get monthly expenses
+            const monthlyExpenses = dbUser.expenses.filter(expense => expense.frequency === 'monthly');
+            const totalMonthlyExpense = getTotals(monthlyExpenses);
+            const biMonthlyExpenses = dbUser.expenses.filter(expense => expense.frequency === 'bi-monthly');
+            const totalBiMonthlyExpense = getTotals(biMonthlyExpenses);
+            const annualExpenses = dbUser.expenses.filter(expense => expense.frequency === 'annual');
+            const totalAnnualExpenses = getTotals(annualExpenses);
+            const semiAnnualExpenses = dbUser.expenses.filter(expense => expense.frequency === 'semi-annual');
+            const totalSemiAnnualExpense = getTotals(semiAnnualExpenses);
+
+            // get monthly income
+            const monthlyIncomes = dbUser.incomes.filter(income => income.frequency === 'monthly');
+            const totalMonthlyIncome = getTotals(monthlyIncomes);
+            const biMonthlyIncomes = dbUser.incomes.filter(income => income.frequency === 'bi-monthly');
+            const totalBiMonthlyIncome = getTotals(biMonthlyIncomes);
+            const annualIncomes = dbUser.incomes.filter(income => income.frequency === 'annual');
+            const totalAnnualIncome = getTotals(annualIncomes);
+            const semiAnnualIncomes = dbUser.incomes.filter(income => income.frequency === 'semi-annual');
+            const totalSemiAnnualIncome = getTotals(semiAnnualIncomes);
+
+            let result = [];
+            let index = 1;
+            for (let i = m; i < (m + 12); i++) {
+              let temp = [];
+              switch (index) {
+                case 1: {
+                  temp.push(getMonth(i));
+                  temp.push(totalMonthlyIncome);
+                  temp.push(totalMonthlyExpense);
+                  break;
+                }
+                default: {
+                  switch (index) {
+                    // semi annual
+                    case 6:
+                      {
+                        temp.push(getMonth(i));
+                        temp.push(totalMonthlyIncome + totalBiMonthlyIncome + totalSemiAnnualIncome);
+                        temp.push(totalMonthlyExpense + totalBiMonthlyExpense + totalSemiAnnualExpense);
+                        break;
+                      }
+                    // annual
+                    case 12:
+                      {
+                        temp.push(getMonth(i));
+                        temp.push(totalMonthlyIncome + totalBiMonthlyIncome + totalSemiAnnualIncome + totalAnnualIncome);
+                        temp.push(totalMonthlyExpense + totalBiMonthlyExpense + totalSemiAnnualExpense + totalAnnualExpenses);
+                        break;
+                      }
+                    default: {
+                      if ((index % 2) == 0) {
+                        // monthly + bi-monthly
+                        temp.push(getMonth(i));
+                        temp.push(totalMonthlyIncome + totalBiMonthlyIncome);
+                        temp.push(totalMonthlyExpense + totalBiMonthlyExpense);
+                      } else {
+                        // just monthly
+                        temp.push(getMonth(i));
+                        temp.push(totalMonthlyIncome);
+                        temp.push(totalMonthlyExpense);
+                      }
+                      break;
+                    }
+                  }
+                }
+              }
+              index++;
+              result.push(temp);
+            }
+
+            res.json(result);
+          })
+          .catch(function (err) {
+            // If an error occurs, send it back to the client
+            console.log('29', { err });
             res.json(err);
           });
       } else {
@@ -38,7 +173,7 @@ module.exports = function(app) {
   app.post(
     "/api/expenses",
     passport.authenticate("jwt", { session: false }),
-    function(req, res) {
+    function (req, res) {
       let token = getToken(req.headers);
       if (token) {
         Expense.create({
@@ -46,7 +181,7 @@ module.exports = function(app) {
           category: req.body.category,
           value: req.body.value,
           frequency: req.body.frequency
-        }).then(function(dbExpense) {
+        }).then(function (dbExpense) {
           User.update(
             {
               _id: req.body.id
@@ -54,25 +189,23 @@ module.exports = function(app) {
             { $push: { expenses: dbExpense._id } },
             { new: true }
           )
-            .then(function(dbUser) {
+            .then(function (dbUser) {
               // If the User was updated successfully, send it back to the client
-              //console.log('1',req.body.id)
               User.findById(req.body.id)
                 .populate("expenses")
-                .then(function(dbUser) {
+                .then(function (dbUser) {
                   // If able to successfully find and associate all Users and Notes, send them back to the client
-                  //console.log('1', dbUser)
                   res.json(dbUser.expenses);
                 })
-                .catch(function(err) {
+                .catch(function (err) {
                   // If an error occurs, send it back to the client
-                  console.log({ err });
+                  console.log('68', { err });
                   res.json(err);
                 });
             })
-            .catch(function(err) {
+            .catch(function (err) {
               // If an error occurs, send it back to the client
-              console.log("2", { err });
+              console.log("74", { err });
               res.json(err);
             });
         });
@@ -89,20 +222,16 @@ module.exports = function(app) {
   app.get(
     "/api/incomes/:id",
     passport.authenticate("jwt", { session: false }),
-    function(req, res) {
+    function (req, res) {
       let token = getToken(req.headers);
       if (token) {
-        User.findById(req.params.id)
-          .populate("incomes")
-          .then(function(dbUser) {
-            // If able to successfully find and associate all Users and Notes, send them back to the client
-            res.json(dbUser.incomes);
-          })
-          .catch(function(err) {
-            // If an error occurs, send it back to the client
-            console.log({ err });
-            res.json(err);
-          });
+        User.find({ _id: req.params.id }, function (err, dbUser) {
+          if (err) {
+            console.log('here')
+            throw err;
+          }
+          res.json(dbUser.incomes);
+        })
       } else {
         return res.status(403).send({ success: false, msg: "Unauthorized." });
       }
@@ -113,15 +242,15 @@ module.exports = function(app) {
   app.post(
     "/api/incomes",
     passport.authenticate("jwt", { session: false }),
-    function(req, res) {
+    function (req, res) {
       let token = getToken(req.headers);
       if (token) {
         Income.create({
           name: req.body.name,
           frequency: req.body.frequency,
           value: req.body.value
-        }).then(function(dbIncome) {
-          console.log(dbIncome._id);
+        }).then(function (dbIncome) {
+          console.log('123', dbIncome._id);
           User.update(
             {
               _id: req.body.id
@@ -129,24 +258,24 @@ module.exports = function(app) {
             { $push: { incomes: dbIncome._id } },
             { new: true }
           )
-            .then(function(dbUser) {
+            .then(function (dbUser) {
               // If the User was updated successfully, send it back to the client
-              console.log('2',req.body.id)
+              console.log('133', req.body.id)
               User.findById(req.body.id)
                 .populate("incomes")
-                .then(function(dbUser) {
+                .then(function (dbUser) {
                   // If able to successfully find and associate all Users and Notes, send them back to the client
                   res.json(dbUser.incomes);
                 })
-                .catch(function(err) {
+                .catch(function (err) {
                   // If an error occurs, send it back to the client
-                  console.log({ err });
+                  console.log('142', err);
                   res.json(err);
                 });
             })
-            .catch(function(err) {
+            .catch(function (err) {
               // If an error occurs, send it back to the client
-              console.log("2", { err });
+              console.log("148", { err });
               res.json(err);
             });
         });
@@ -163,18 +292,18 @@ module.exports = function(app) {
   app.get(
     "/api/studentLoans/:id",
     passport.authenticate("jwt", { session: false }),
-    function(req, res) {
+    function (req, res) {
       let token = getToken(req.headers);
       if (token) {
         User.findById(req.params.id)
           .populate("studentLoans")
-          .then(function(dbUser) {
+          .then(function (dbUser) {
             // If able to successfully find and associate all Users and Notes, send them back to the client
             res.json(dbUser.studentLoans);
           })
-          .catch(function(err) {
+          .catch(function (err) {
             // If an error occurs, send it back to the client
-            console.log({ err });
+            console.log('176', { err });
             res.json(err);
           });
       } else {
@@ -187,15 +316,16 @@ module.exports = function(app) {
   app.post(
     "/api/studentLoans",
     passport.authenticate("jwt", { session: false }),
-    function(req, res) {
+    function (req, res) {
       let token = getToken(req.headers);
       if (token) {
+        let data = amort(req.body.value, req.body.interest, 20);
         StudentLoans.create({
           name: req.body.name,
           interest: req.body.interest,
-          value: req.body.value
-        }).then(function(dbStudentLoan) {
-          console.log(dbStudentLoan._id);
+          value: req.body.value,
+          amortization: data
+        }).then(function (dbStudentLoan) {
           User.update(
             {
               _id: req.body.id
@@ -203,24 +333,17 @@ module.exports = function(app) {
             { $push: { studentLoans: dbStudentLoan._id } },
             { new: true }
           )
-            .then(function(dbUser) {
+            .then(function (dbUser) {
               // If the User was updated successfully, send it back to the client
-              console.log('3',{dbUser})
-              User.findById(req.body.id)
-                .populate("studentLoans")
-                .then(function(dbUser) {
-                  // If able to successfully find and associate all Users and Notes, send them back to the client
-                  res.json(dbUser.studentLoans);
-                })
-                .catch(function(err) {
-                  // If an error occurs, send it back to the client
-                  console.log({ err });
-                  res.json(err);
-                });
+              console.log('207', { dbUser })
+              // add table to db
+
+              // If able to successfully find and associate all Users and Notes, send them back to the client
+              res.json(dbUser);
             })
-            .catch(function(err) {
+            .catch(function (err) {
               // If an error occurs, send it back to the client
-              console.log("2", { err });
+              console.log("216", { err });
               res.json(err);
             });
         });
@@ -234,26 +357,47 @@ module.exports = function(app) {
 
   //////////////////////////////////
   // get net worth
-  // get incomes
-  // get expenses
-  // get loans
   app.get(
     "/api/networth/:id",
     passport.authenticate("jwt", { session: false }),
-    function(req, res) {
+    function (req, res) {
       let token = getToken(req.headers);
       if (token) {
         User.findById(req.params.id)
           .populate("expenses incomes studentLoans")
-          .then(function(dbUser) {
-            console.log(dbUser.expenses)
-            console.log(dbUser.incomes)
-            console.log(dbUser.studentLoans)
-            res.json(dbUser);            
+          .then(function (dbUser) {
+            let networth = 0;
+            let totalExpenses = 0;
+            for (let i = 0; i < dbUser.expenses.length; i++) {
+              totalExpenses += dbUser.expenses[i];
+            }
+            let totalIncome = 0;
+            for (let i = 0; i < dbUser.incomes.length; i++) {
+              totalIncome += dbUser.incomes[i];
+            }
+            let totalLoans = 0;
+            for (let i = 0; i < dbUser.studentLoans.length; i++) {
+              totalLoans += dbUser.studentLoans[i].value;
+            }
+            let totalInterest = 0;
+            for (let i = 0; i < dbUser.studentLoans.length; i++) {
+              let len = dbUser.studentLoans[i].amortization.length;
+              totalInterest += dbUser.studentLoans[i].amortization[len - 1][4]
+            }
+            totalLoans = totalLoans.toFixed(2);
+            totalInterest = totalInterest.toFixed(2);
+            networth = (totalIncome - totalLoans).toFixed(2);
+            let obj = {
+              networth,
+              totalIncome,
+              totalExpenses,
+              totalInterest
+            }
+            res.json(obj);
           })
-          .catch(function(err) {
+          .catch(function (err) {
             // If an error occurs, send it back to the client
-            console.log({ err });
+            console.log('262', { err });
             res.json(err);
           });
       } else {
@@ -263,12 +407,17 @@ module.exports = function(app) {
   );
   //////////////////////////////////
 
-  getTotals = function(total, obj) {
-    
-    return total + obj.value;
+  getTotals = function (arr) {
+
+    let sum = 0;
+    for (let i = 0; i < arr.length; i++) {
+      sum += arr[i].value
+    }
+    return sum;
+
   }
   //////////////////////////////////
-  getToken = function(headers) {
+  getToken = function (headers) {
     if (headers && headers.authorization) {
       var parted = headers.authorization.split(" ");
       if (parted.length === 2) {
@@ -281,4 +430,40 @@ module.exports = function(app) {
     }
   };
   //////////////////////////////////
+  function amort(amount, interest, years) {
+    let afterMonths = 6;
+    let mortgage = new Mortgage(amount, interest, years);
+    let payment = mortgage.fixedMonthlyPayment();
+    let remaining = mortgage.remainingLoanBalance(afterMonths);
+    let amortTable = mortgage.amortizationTable();
+    let amortList = amortTable.map(function (row, i) {
+      return [i, row[0], row[1], row[2], row[3], row[4]];
+    });
+    console.log("Fixed monthly payments: " + payment);
+    console.log(
+      "Remaining balance after " + afterMonths + " months: " + remaining
+    );
+    let temp = [['Month', 'Balance']];
+    amortList.forEach(Element => {
+      temp.push(Element)
+    })
+    console.log("Amortization table:");
+
+    return temp;
+  }
+
+  //////////////////////////////////
+  function getMonth(m) {
+    if (m < 0) {
+      m = 0;
+    }
+    if (m >= 12) {
+      m = m - 12;
+    }
+    let months = [
+      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+    ]
+
+    return months[m];
+  }
 };

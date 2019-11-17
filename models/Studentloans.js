@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 const StudentLoanSchema = new Schema({
   name: {
     type: String,
-    unique: true,
+    unique: false,
     required: true
   },  
   value: {
@@ -15,6 +15,9 @@ const StudentLoanSchema = new Schema({
   interest: {
     type: Number,
     required: true
+  },
+  amortization: {
+    type: Array
   }
 });
 
