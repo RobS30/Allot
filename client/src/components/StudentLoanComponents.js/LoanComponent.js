@@ -11,7 +11,7 @@ class StudentLoanComponent extends React.Component {
           <td>{this.props.name}</td>
           <td>{this.props.value}</td>
           <td>{this.props.interest}</td>
-          <td className="icon-style"><FaTrash /></td>
+          <td onClick={this.props.handleClick} className="icon-style"><FaTrash /></td>
         </tr>
 
         </tbody>
