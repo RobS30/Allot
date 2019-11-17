@@ -12,7 +12,7 @@ class ExpenseComponent extends React.Component {
             <td>{this.props.value}</td>
             <td>{this.props.category}</td>
             <td>{this.props.frequency}</td>
-            <td className="icon-style"><FaTrash /></td>
+            <td onClick={this.props.handleClick} className="icon-style"><FaTrash /></td>
           </tr>
         </tbody>
         {/* <div className="col">{this.props.name}</div>

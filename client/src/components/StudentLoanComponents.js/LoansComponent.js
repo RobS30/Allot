@@ -73,6 +73,37 @@ class StudentLoansComponent extends React.Component {
       });
   };
 
+  handleClick = e => {
+    e.preventDefault();
+
+    const { name, value, interest } = e.target;
+
+    let user = {};
+    if (sessionStorage.getItem("user")) {
+      user = JSON.parse(sessionStorage.getItem("user"));
+    }
+    
+    axios.defaults.headers.common["Authorization"] = sessionStorage.getItem(
+      "jwtToken"
+    );
+    axios
+      .delete("/api/studentLoans/" + user.id)
+      .then(res => {
+        if (this._isMounted && Array.isArray(res.data)) {
+          console.log(res.data.length);
+          this.setState({
+            studentLoans: res.data
+          });
+        }
+      })
+      .catch(error => {
+        console.log("error", error);
+        if (error.response.status === 401) {
+          this.props.history.push("/login");
+        }
+      });
+  };
+
   render() {
     return (
       <>
@@ -97,6 +128,7 @@ class StudentLoansComponent extends React.Component {
                         name={studentLoans.name}
                         value={studentLoans.value}
                         interest={studentLoans.interest}
+                        handleClick={this.handleClick}
                       />
                     );
                   })}

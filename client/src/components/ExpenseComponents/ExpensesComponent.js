@@ -75,6 +75,37 @@ class ExpensesComponent extends React.Component {
       });
   };
 
+  handleClick = e => {
+    e.preventDefault();
+
+    const { name, value, category, frequency } = e.target;
+
+    let user = {};
+    if (sessionStorage.getItem("user")) {
+      user = JSON.parse(sessionStorage.getItem("user"));
+    }
+    
+    axios.defaults.headers.common["Authorization"] = sessionStorage.getItem(
+      "jwtToken"
+    );
+    axios
+      .delete("/api/expenses/" + user.id)
+      .then(res => {
+        if (this._isMounted && Array.isArray(res.data)) {
+          console.log(res.data.length);
+          this.setState({
+            expenses: res.data
+          });
+        }
+      })
+      .catch(error => {
+        console.log("error", error);
+        if (error.response.status === 401) {
+          this.props.history.push("/login");
+        }
+      });
+  };
+
   render() {
     return (
       <>
@@ -101,6 +132,7 @@ class ExpensesComponent extends React.Component {
                         category={expense.category}
                         value={expense.value}
                         frequency={expense.frequency}
+                        handleClick={this.handleClick}
                       />
                     );
                   })}
