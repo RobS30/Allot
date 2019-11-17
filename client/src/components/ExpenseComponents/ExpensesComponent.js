@@ -84,12 +84,14 @@ class ExpensesComponent extends React.Component {
             <div>
               <div className="row">
                 <table className="expense-table">
-                  <tr>
-                    <th>Expense</th>
-                    <th>Amount</th>
-                    <th>Category</th>
-                    <th>Frequency</th>
-                  </tr>
+                  <thead>
+                    <tr>
+                      <th>Expense</th>
+                      <th>Amount</th>
+                      <th>Category</th>
+                      <th>Frequency</th>
+                    </tr>
+                  </thead>
                   {this.state.expenses.map((expense, index) => {
                     return (
                       <ExpenseComponent
