@@ -225,13 +225,14 @@ module.exports = function (app) {
     function (req, res) {
       let token = getToken(req.headers);
       if (token) {
-        User.find({ _id: req.params.id }, function (err, dbUser) {
-          if (err) {
-            console.log('here')
-            throw err;
-          }
+        User.findById(req.params.id).populate('incomes').then(function (dbUser) {
+          
           res.json(dbUser.incomes);
-        })
+        }).catch(function (err) {
+          // If an error occurs, send it back to the client
+          console.log('142', err);
+          res.json(err);
+        });
       } else {
         return res.status(403).send({ success: false, msg: "Unauthorized." });
       }
