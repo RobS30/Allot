@@ -90,6 +90,7 @@ class ExpensesComponent extends React.Component {
                       <th>Amount</th>
                       <th>Category</th>
                       <th>Frequency</th>
+                      <th>Remove</th>
                     </tr>
                   </thead>
                   {this.state.expenses.map((expense, index) => {

@@ -45,7 +45,7 @@ class KeyMetricsChart extends React.Component {
                 <h3 className="key-title">Total Expenses: </h3>
                 <p>${this.state.totalExpenses}</p>
                 <h3 className="key-title">Total Interest: </h3>
-                <p>${this.state.totalInterest}</p>
+                <p>{this.state.totalInterest}%</p>
 
             </>
         );
