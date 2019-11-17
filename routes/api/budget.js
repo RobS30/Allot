@@ -335,12 +335,17 @@ module.exports = function (app) {
             { new: true }
           )
             .then(function (dbUser) {
-              // If the User was updated successfully, send it back to the client
-              console.log('207', { dbUser })
-              // add table to db
-
-              // If able to successfully find and associate all Users and Notes, send them back to the client
-              res.json(dbUser);
+              User.findById(req.body.id)
+                .populate("studentLoans")
+                .then(function (dbUser) {
+                  // If able to successfully find and associate all Users and Notes, send them back to the client
+                  res.json(dbUser.studentLoans);
+                })
+                .catch(function (err) {
+                  // If an error occurs, send it back to the client
+                  console.log('68', { err });
+                  res.json(err);
+                });
             })
             .catch(function (err) {
               // If an error occurs, send it back to the client
