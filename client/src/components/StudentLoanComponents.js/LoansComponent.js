@@ -82,11 +82,13 @@ class StudentLoansComponent extends React.Component {
             <div>
               <div className="row">
                 <table className="mb-2">
-                  <tr>
-                    <th>Loan</th>
-                    <th>Amount</th>
-                    <th>Interest</th>
-                  </tr>
+                  <thead>
+                    <tr>
+                      <th>Loan</th>
+                      <th>Amount</th>
+                      <th>Interest</th>
+                    </tr>
+                  </thead>
                   {this.state.studentLoans.map((studentLoans, index) => {
                     return (
                       <StudentLoanComponent

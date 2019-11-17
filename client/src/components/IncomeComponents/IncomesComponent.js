@@ -82,11 +82,13 @@ class IncomesComponent extends React.Component {
             <div>
               <div className="row">
                 <table>
-                  <tr>
-                    <th>Income</th>
-                    <th>Amount</th>
-                    <th>Frequency</th>
-                  </tr>
+                  <thead>
+                    <tr>
+                      <th>Income</th>
+                      <th>Amount</th>
+                      <th>Frequency</th>
+                    </tr>
+                  </thead>
                   {this.state.incomes.map((income, index) => {
                     return (
                       <IncomeComponent

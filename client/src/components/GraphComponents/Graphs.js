@@ -3,6 +3,7 @@ import axios from "axios";
 import "./graphs.css";
 import AmortizationChart from "./amort_time_series/studentloanamortization";
 import KeyMetricsChart from "./key_metrics/keyMetricsComponent";
+import ExpenseCategoryPie from "./expenses_by_category_pie/expenseCategoryPieComponent";
 
 class GraphComponent extends React.Component {
   state = {
@@ -69,7 +70,7 @@ class GraphComponent extends React.Component {
           <div className="row">
             <div className="col-lg-3 mr-4 mt-4 graph-components">
               
-              Pie Chart Goes Here
+              <ExpenseCategoryPie />
               
               </div>
 
