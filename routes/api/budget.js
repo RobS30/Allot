@@ -5,7 +5,7 @@ const Expense = require("../../models/Expense");
 const Income = require("../../models/Income");
 const StudentLoans = require("../../models/StudentLoans");
 require("../../config/passport")(passport);
-const Mortgage = require("../../client/src/loanamortization/mortgage");
+const Mortgage = require("../../client/src/components/GraphComponents/amort_time_series/loanamortization/mortgage");
 
 module.exports = function (app) {
 
