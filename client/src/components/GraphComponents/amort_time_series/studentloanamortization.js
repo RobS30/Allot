@@ -41,16 +41,19 @@ class AmortizationChart extends React.Component {
     return (
       <div>
         <Chart
-          width={"600px"}
-          height={"350px"}
+          width={"700px"}
+          height={"500px"}
           chartType="ScatterChart"
           loader={<div>Loading Chart</div>}
           data={this.state.chartDtata}
           options={{
-            title: "Age vs. Weight comparison",
-            hAxis: { title: "Age", minValue: 0, maxValue: 15 },
-            vAxis: { title: "Weight", minValue: 0, maxValue: 15 },
-            legend: "none"
+            // title: "Loan Payoff Schedule", textStyle: {color: '#FFFFFF', fontsize: 20, bold: true},
+            hAxis: { title: "test", minValue: 0, maxValue: 240, textStyle: {color: '#FFFFFF', fontsize: 20, bold: true}},
+            vAxis: { title: "test", minValue: 0, maxValue: 200000, textStyle: {color: '#FFFFFF', fontsize: 18, bold: true}},
+            legend: "none",
+            // background color for payoff schedule goes here
+            backgroundColor: '#181818',
+            // colors: ['#255']
           }}
           rootProps={{ "data-testid": "1" }}
           getChartEditor={({ chartEditor, chartWrapper, google }) => {
