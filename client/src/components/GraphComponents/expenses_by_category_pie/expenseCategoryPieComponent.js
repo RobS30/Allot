@@ -22,12 +22,16 @@ class ExpenseCategoryPie extends React.Component {
 
     axios.get('/api/expensechart/' + user.id).then(res => {
       // this needs to be updated to pull categories along with the number of times they occur       
-      //console.log('chartData:', res.data[1])
+      
       let tempData = [['Expense', '%']];
       for (let i=0; i<res.data[1].length; i++) {
-        tempData.push(res.data[1][i])
+        let arr = [];
+        arr.push(res.data[1][i][0])
+        arr.push(parseInt(res.data[1][i][1]))
+        
+        tempData.push(arr);
       }
-      console.log(tempData)
+      //console.log('tempData:',tempData)
       this.setState({
         chartData: tempData
       });
@@ -39,11 +43,11 @@ class ExpenseCategoryPie extends React.Component {
       <div>
 
         <Chart
-          width={'100px'}
-          height={'100px'}
+          width={'300px'}
+          height={'300px'}
           chartType="PieChart"
           loader={<div>Loading Chart</div>}
-          data={[this.state.chartData]}
+          data={this.state.chartData}
           //   // data needs to be in a category and then total category expense/totalexpenses
           //   ['Expense', '%'],
           //   ['Work', 11],
