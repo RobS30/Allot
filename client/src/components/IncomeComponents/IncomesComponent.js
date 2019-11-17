@@ -92,7 +92,6 @@ class IncomesComponent extends React.Component {
                       <IncomeComponent
                         key={index}
                         name={income.name}
-                        category={income.category}
                         value={income.value}
                         frequency={income.frequency}
                       />

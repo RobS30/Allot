@@ -19,54 +19,51 @@
 }
 
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .main-body-app {
   background-color: #181818;
   color: white;
+  height: 100%;
 }
 
 .top-nav {
-background-color:  #4D58FF;
-
+  background-color: #4d58ff;
 }
-
-
 
 .main-title {
   margin: 0 20%;
   text-align: center;
   padding-bottom: 10vh;
   font-size: 400%;
-
 }
 
 .container {
-max-height: 130vh;
-height: 130vh;
-width: 60%;
-padding-top: 10vh;
-
+  max-height: 800vh;
+  height: 100%;
+  width: 60%;
+  padding-top: 10vh;
 }
 
 .form-signin-heading {
-
-text-align: center;
-
+  text-align: center;
 }
 
 .form-signin {
   margin: 0 20%;
-  box-shadow: 0 4px 8px 0 rgba(228, 228, 228, 0.2), 0 6px 20px 0 rgba(228, 228, 228, 0.19);
+  box-shadow: 0 4px 8px 0 rgba(228, 228, 228, 0.2),
+    0 6px 20px 0 rgba(228, 228, 228, 0.19);
   padding: 5%;
-  
 }
 
 .form-thing {
-margin-bottom: 4vh;
-
+  margin-bottom: 4vh;
 }
 
 label {
@@ -76,6 +73,3 @@ label {
 .form-thing1 {
   margin-bottom: 1vh;
 }
-
-
-
