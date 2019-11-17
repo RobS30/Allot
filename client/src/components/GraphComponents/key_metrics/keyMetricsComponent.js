@@ -23,7 +23,7 @@ class KeyMetricsChart extends React.Component {
         axios.defaults.headers.common["Authorization"] = sessionStorage.getItem(
             "jwtToken"
         );
-        axios.get('/api/networth' + user.id).then(function (res) {
+        axios.get('/api/networth/' + user.id).then(function (res) {
             this.setState({
                 networth: res.data.networth,
                 totalIncome: res.data.totalIncome,
