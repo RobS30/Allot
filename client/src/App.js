@@ -5,7 +5,7 @@ import MainDisplay from "./components/MainDisplay";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Nav from "./components/NavBar/Navbar";
 import Login from "./components/LoginPage/Login";
-import Footer from "./components/NavBar/Footer";
+
 
 class App extends Component {
   state = {
@@ -47,7 +47,7 @@ class App extends Component {
             <>
             <MainDisplay />
             
-            <Footer />
+          
             </>
             
           ) : (

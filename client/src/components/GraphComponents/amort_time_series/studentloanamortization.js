@@ -40,31 +40,9 @@ class AmortizationChart extends React.Component {
 
     return (
       <div>
-        <button
-          onClick={() => {
-            const { google, chartEditor, chartWrapper } = this.state;
-            if (
-              chartWrapper === null ||
-              google === null ||
-              chartEditor === null
-            )
-              return;
-            chartEditor.openDialog(chartWrapper);
-            google.visualization.events.addListener(chartEditor, "ok", () => {
-              const newChartWrapper = chartEditor.getChartWrapper();
-              newChartWrapper.draw();
-              const newChartOptions = newChartWrapper.getOptions();
-              const newChartType = newChartWrapper.getChartType();
-              console.log("Chart type changed to ", newChartType);
-              console.log("Chart options changed to ", newChartOptions);
-            });
-          }}
-        >
-          Edit data
-        </button>
         <Chart
           width={"600px"}
-          height={"400px"}
+          height={"350px"}
           chartType="ScatterChart"
           loader={<div>Loading Chart</div>}
           data={this.state.chartDtata}

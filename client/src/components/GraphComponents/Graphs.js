@@ -52,11 +52,11 @@ class GraphComponent extends React.Component {
   render() {
     return (
       <>
-        <div className="container">
+        <div className="container graphs-display mb-2">
           <div className="row">
-            <div className="col-lg-3 mr-2 graph-components">
+            <div className="col-lg-3 mr-4 graph-components">
               
-              Key Metrics Goes here
+              <KeyMetricsChart />
             
             </div>
             <div className="col-lg-8 graph-components">
@@ -67,7 +67,7 @@ class GraphComponent extends React.Component {
 
           </div>
           <div className="row">
-            <div className="col-lg-3 mr-2 mt-4 graph-components">
+            <div className="col-lg-3 mr-4 mt-4 graph-components">
               
               Pie Chart Goes Here
               
