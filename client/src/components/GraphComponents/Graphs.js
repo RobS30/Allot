@@ -4,6 +4,7 @@ import "./graphs.css";
 import AmortizationChart from "./amort_time_series/studentloanamortization";
 import KeyMetricsChart from "./key_metrics/keyMetricsComponent";
 import ExpenseCategoryPie from "./expenses_by_category_pie/expenseCategoryPieComponent";
+import NetIncomeBarComponent from './net_income/netincomecomponent';
 
 class GraphComponent extends React.Component {
   state = {
@@ -62,7 +63,7 @@ class GraphComponent extends React.Component {
             </div>
             <div className="col-lg-8 graph-components">
               
-              Graph one goes here
+            <NetIncomeBarComponent />
             
             </div>
 
