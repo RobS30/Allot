@@ -22,7 +22,7 @@ class AmortizationChart extends React.Component {
     axios.defaults.headers.common["Authorization"] = sessionStorage.getItem(
       "jwtToken"
     );
-    axios.get('/api/studentLoans' + user.id).then(function (res) {
+    axios.get('/api/studentLoans/' + user.id).then(res => {
       // balances
       // avg interest rate
 

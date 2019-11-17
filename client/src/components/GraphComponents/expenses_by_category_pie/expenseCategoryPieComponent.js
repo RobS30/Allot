@@ -20,7 +20,7 @@ class expensecategorypie extends React.Component {
       "jwtToken"
     );
     
-    axios.get('/api/expensechart' + id).then(function(res){
+    axios.get('/api/expensechart/' + id).then(res => {
     // this needs to be updated to pull categories along with the number of times they occur       
       let data = (res.data.balances, res.data.rate);
       this.setState({
