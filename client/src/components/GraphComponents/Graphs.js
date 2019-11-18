@@ -52,7 +52,7 @@ class GraphComponent extends React.Component {
   render() {
     return (
       <>
-        <div className="container graphs-display mb-2">
+        <div className="graphs-display mb-2">
           <div className="row">
             <div className="col-lg-3 mr-4 graph-components d-flex justify-content-center">
               <KeyMetricsChart />
