@@ -22,7 +22,7 @@ class Nav extends Component {
   logout = () => {
     sessionStorage.removeItem("jwtToken");
     sessionStorage.removeItem("user");
-    window.location.reload();
+    window.location.assign("/login");
   };
 
   login = () => {

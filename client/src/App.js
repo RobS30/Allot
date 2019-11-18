@@ -6,8 +6,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Nav from "./components/NavBar/Navbar";
 import Login from "./components/LoginPage/Login";
 
-
-
 class App extends Component {
   state = {
     user: {}
@@ -37,27 +35,18 @@ class App extends Component {
 
   render() {
     return (
-      
-  
-      
       <div className="main-body-app">
-        
         <Nav />
-        
-          {sessionStorage.getItem("user") ? (
-            <>
-            <MainDisplay />
-            
-          
-            </>
-            
-          ) : (
-<>
-            <Login />
-            
-            </>
-          )}
 
+        {sessionStorage.getItem("user") ? (
+          <>
+            <MainDisplay />
+          </>
+        ) : (
+          <>
+            <Login />
+          </>
+        )}
       </div>
     );
   }

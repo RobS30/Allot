@@ -6,7 +6,6 @@ class StudentLoanComponent extends React.Component {
     return (
       <React.Fragment>
         <tbody>
-
         <tr className="table-data">
           <td>{this.props.name}</td>
           <td>{this.props.value}</td>

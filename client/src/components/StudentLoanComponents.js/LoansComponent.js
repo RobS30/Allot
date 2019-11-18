@@ -68,7 +68,7 @@ class StudentLoansComponent extends React.Component {
       .catch(error => {
         console.log("error", error);
         if (error.response.status === 401) {
-          this.props.history.push("/login");
+          window.location.assign("/");
         }
       });
   };
@@ -99,7 +99,7 @@ class StudentLoansComponent extends React.Component {
       .catch(error => {
         console.log("error", error);
         if (error.response.status === 401) {
-          this.props.history.push("/login");
+          window.location.assign("/");
         }
       });
   };
