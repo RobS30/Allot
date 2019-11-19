@@ -11,7 +11,7 @@ class IncomeInput extends React.Component {
             <td>{this.props.name}</td>
             <td>{this.props.value}</td>
             <td>{this.props.frequency}</td>
-            <td onClick={this.props.handleClick} className="icon-style"><FaTrash /></td>
+            <td id={this.props.id} onClick={() => this.props.handleClick(this.props.id)} className="icon-style"><FaTrash /></td>
           </tr>
         </tbody>
       </React.Fragment>

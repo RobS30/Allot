@@ -61,10 +61,14 @@ class ExpensesComponent extends React.Component {
       .post("/api/expenses", expense)
       .then(res => {
         if (this._isMounted && Array.isArray(res.data)) {
-          console.log(res.data.length);
           this.setState({
             expenses: res.data
           });
+
+          window.dispatchEvent(new CustomEvent("expenses-changed"));
+          window.dispatchEvent(new CustomEvent("update-KeyMetricsChart"));
+          window.dispatchEvent(new CustomEvent("incomes-changed"));
+          console.log(res.data.length);
         }
       })
       .catch(error => {
@@ -75,27 +79,34 @@ class ExpensesComponent extends React.Component {
       });
   };
 
-  handleClick = e => {
-    e.preventDefault();
-
-    const { name, value, category, frequency } = e.target;
+  // delete expense
+  handleClick = id => {
+    console.log("delete expense:", id);
 
     let user = {};
     if (sessionStorage.getItem("user")) {
       user = JSON.parse(sessionStorage.getItem("user"));
     }
-    
+
     axios.defaults.headers.common["Authorization"] = sessionStorage.getItem(
       "jwtToken"
     );
     axios
-      .delete("/api/expenses/" + user.id)
+      .delete("/api/expenses/" + user.id, {
+        data: {
+          expense_id: id
+        }
+      })
       .then(res => {
+        console.log(res.data)
         if (this._isMounted && Array.isArray(res.data)) {
           console.log(res.data.length);
           this.setState({
             expenses: res.data
           });
+
+          window.dispatchEvent(new CustomEvent("expenses-changed"));
+          window.dispatchEvent(new CustomEvent("update-KeyMetricsChart"));
         }
       })
       .catch(error => {
@@ -105,6 +116,7 @@ class ExpensesComponent extends React.Component {
         }
       });
   };
+
 
   render() {
     return (
@@ -128,6 +140,7 @@ class ExpensesComponent extends React.Component {
                     return (
                       <ExpenseComponent
                         key={index}
+                        id={expense._id}
                         name={expense.name}
                         category={expense.category}
                         value={expense.value}

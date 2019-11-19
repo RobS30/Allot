@@ -14,41 +14,6 @@ class GraphComponent extends React.Component {
 
   componentDidMount() {}
 
-  handleSubmit = e => {
-    e.preventDefault();
-
-    const { name, value, category, frequency } = e.target;
-
-    let user = {};
-    if (localStorage.getItem("user")) {
-      user = JSON.parse(localStorage.getItem("user"));
-    }
-    const income = {
-      name: name.value,
-      category: category.value,
-      value: value.value,
-      frequency: frequency.value,
-      email: user.email
-    };
-    axios.defaults.headers.common["Authorization"] = localStorage.getItem(
-      "jwtToken"
-    );
-    axios
-      .post("/api/incomes", income)
-      .then(res => {
-        console.log(res.data.length);
-        this.setState({
-          incomes: res.data
-        });
-      })
-      .catch(error => {
-        console.log("error", error);
-        if (error.response.status === 401) {
-          this.props.history.push("/login");
-        }
-      });
-  };
-
   render() {
     return (
       <>
@@ -65,11 +30,10 @@ class GraphComponent extends React.Component {
             <div className="col-lg-11 mt-4 graph-components d-flex justify-content-center">
               <NetIncomeBarComponent />
             </div>
-            </div>
-            <div className="row">
-              <div className="col-lg-11 mt-4 graph-components d-flex justify-content-center mb-4">
-                <AmortizationChart />
-              </div>
+          </div>
+          <div className="row">
+            <div className="col-lg-11 mt-4 graph-components d-flex justify-content-center mb-4">
+              <AmortizationChart />
             </div>
           </div>
         

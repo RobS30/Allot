@@ -63,6 +63,47 @@ class IncomesComponent extends React.Component {
           this.setState({
             incomes: res.data
           });
+
+          window.dispatchEvent(new CustomEvent('incomes-changed'));
+          window.dispatchEvent(new CustomEvent('update-KeyMetricsChart'));
+        }
+      })
+      .catch(error => {
+        console.log("error", error);
+        if (error.response.status === 401) {
+          window.location.assign("/");
+        }
+      });
+  };
+
+  // delete income
+  handleClick = id => {
+    console.log("delete income:", id);
+
+    let user = {};
+    if (sessionStorage.getItem("user")) {
+      user = JSON.parse(sessionStorage.getItem("user"));
+    }
+
+    axios.defaults.headers.common["Authorization"] = sessionStorage.getItem(
+      "jwtToken"
+    );
+    axios
+      .delete("/api/incomes/" + user.id, {
+        data: {
+          income_id: id
+        }
+      })
+      .then(res => {
+        console.log(res.data)
+        if (this._isMounted && Array.isArray(res.data)) {
+          console.log(res.data.length);
+          this.setState({
+            incomes: res.data
+          });
+
+          window.dispatchEvent(new CustomEvent("expenses-changed"));
+          window.dispatchEvent(new CustomEvent("update-KeyMetricsChart"));
         }
       })
       .catch(error => {
@@ -126,6 +167,7 @@ class IncomesComponent extends React.Component {
                     return (
                       <IncomeComponent
                         key={index}
+                        id={income._id}
                         name={income.name}
                         value={income.value}
                         frequency={income.frequency}

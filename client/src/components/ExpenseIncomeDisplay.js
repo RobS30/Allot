@@ -14,6 +14,8 @@ class ExpenseIncomeDisplay extends React.Component {
               <ExpensesComponent />
             </div>
           </div>
+        </div>
+        <div className="income-expense-display">
           <div className="row">
             <div className="col-lg-12">
               <IncomesComponent />
@@ -21,7 +23,7 @@ class ExpenseIncomeDisplay extends React.Component {
           </div>
         </div>
 
-        <div className="student-loan-display mt-4 mb-5">
+        <div className="student-loan-display mb-5">
           <div className="row">
             <div className="col-lg-12">
               <StudentLoansComponent />

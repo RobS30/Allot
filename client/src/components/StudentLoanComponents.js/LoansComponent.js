@@ -63,6 +63,9 @@ class StudentLoansComponent extends React.Component {
           this.setState({
             studentLoans: res.data
           });
+
+          window.dispatchEvent(new CustomEvent('loans-changed'));
+          window.dispatchEvent(new CustomEvent('update-KeyMetricsChart'));
         }
       })
       .catch(error => {
@@ -73,27 +76,34 @@ class StudentLoansComponent extends React.Component {
       });
   };
 
-  handleClick = e => {
-    e.preventDefault();
-
-    const { name, value, interest } = e.target;
+  // delete studentLoans
+  handleClick = id => {
+    console.log("delete studentLoan:", id);
 
     let user = {};
     if (sessionStorage.getItem("user")) {
       user = JSON.parse(sessionStorage.getItem("user"));
     }
-    
+
     axios.defaults.headers.common["Authorization"] = sessionStorage.getItem(
       "jwtToken"
     );
     axios
-      .delete("/api/studentLoans/" + user.id)
+      .delete("/api/studentLoans/" + user.id, {
+        data: {
+          studentLoan_id: id
+        }
+      })
       .then(res => {
+        console.log(res.data)
         if (this._isMounted && Array.isArray(res.data)) {
           console.log(res.data.length);
           this.setState({
             studentLoans: res.data
           });
+
+          window.dispatchEvent(new CustomEvent("expenses-changed"));
+          window.dispatchEvent(new CustomEvent("update-KeyMetricsChart"));
         }
       })
       .catch(error => {
@@ -103,7 +113,7 @@ class StudentLoansComponent extends React.Component {
         }
       });
   };
-
+  
   render() {
     return (
       <>
@@ -125,6 +135,7 @@ class StudentLoansComponent extends React.Component {
                     return (
                       <StudentLoanComponent
                         key={index}
+                        id={studentLoans._id}
                         name={studentLoans.name}
                         value={studentLoans.value}
                         interest={studentLoans.interest}

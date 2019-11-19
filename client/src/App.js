@@ -12,6 +12,12 @@ class App extends Component {
   };
 
   componentDidMount() {
+    window.addEventListener("unauthorized", e => {
+      sessionStorage.removeItem("jwtToken");
+      sessionStorage.removeItem("user");
+      window.location.assign("/login");
+    });
+
     let user = {};
     if (sessionStorage.getItem("user")) {
       user = JSON.parse(sessionStorage.getItem("user"));
