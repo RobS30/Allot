@@ -10,6 +10,14 @@ label.form-label {
   border: 2px solid black;
 }
 
+.expense-table {
+  font-size: 12px;
+}
+
+.icon-style {
+  cursor: pointer;
+}
+
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;

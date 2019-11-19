@@ -63,12 +63,53 @@ class StudentLoansComponent extends React.Component {
           this.setState({
             studentLoans: res.data
           });
+
+          window.dispatchEvent(new CustomEvent('loans-changed'));
+          window.dispatchEvent(new CustomEvent('update-KeyMetricsChart'));
         }
       })
       .catch(error => {
         console.log("error", error);
         if (error.response.status === 401) {
-          this.props.history.push("/login");
+          window.location.assign("/");
+        }
+      });
+  };
+
+  // delete studentLoans
+  handleClick = id => {
+    console.log("delete studentLoan:", id);
+
+    let user = {};
+    if (sessionStorage.getItem("user")) {
+      user = JSON.parse(sessionStorage.getItem("user"));
+    }
+
+    axios.defaults.headers.common["Authorization"] = sessionStorage.getItem(
+      "jwtToken"
+    );
+    axios
+      .delete("/api/studentLoans/" + user.id, {
+        data: {
+          studentLoan_id: id
+        }
+      })
+      .then(res => {
+        console.log(res.data)
+        if (this._isMounted && Array.isArray(res.data)) {
+          console.log(res.data.length);
+          this.setState({
+            studentLoans: res.data
+          });
+
+          window.dispatchEvent(new CustomEvent("expenses-changed"));
+          window.dispatchEvent(new CustomEvent("update-KeyMetricsChart"));
+        }
+      })
+      .catch(error => {
+        console.log("error", error);
+        if (error.response.status === 401) {
+          window.location.assign("/");
         }
       });
   };
@@ -81,21 +122,24 @@ class StudentLoansComponent extends React.Component {
             <h2>Add Student Loan</h2>
             <div>
               <div className="row">
-                <table className="mb-2">
+                <table className="mb-2 loan-table">
                   <thead>
                     <tr>
                       <th>Loan</th>
                       <th>Amount</th>
                       <th>Interest</th>
+                      <th>Remove</th>
                     </tr>
                   </thead>
                   {this.state.studentLoans.map((studentLoans, index) => {
                     return (
                       <StudentLoanComponent
                         key={index}
+                        id={studentLoans._id}
                         name={studentLoans.name}
                         value={studentLoans.value}
                         interest={studentLoans.interest}
+                        handleClick={this.handleClick}
                       />
                     );
                   })}

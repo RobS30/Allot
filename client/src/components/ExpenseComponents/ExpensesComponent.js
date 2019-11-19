@@ -61,16 +61,58 @@ class ExpensesComponent extends React.Component {
       .post("/api/expenses", expense)
       .then(res => {
         if (this._isMounted && Array.isArray(res.data)) {
-          console.log(res.data.length);
           this.setState({
             expenses: res.data
           });
+
+          window.dispatchEvent(new CustomEvent("expenses-changed"));
+          window.dispatchEvent(new CustomEvent("update-KeyMetricsChart"));
+          window.dispatchEvent(new CustomEvent("incomes-changed"));
+          console.log(res.data.length);
         }
       })
       .catch(error => {
         console.log("error", error);
         if (error.response.status === 401) {
-          this.props.history.push("/login");
+          window.location.assign("/");
+        }
+      });
+  };
+
+  // delete expense
+  handleClick = id => {
+    console.log("delete expense:", id);
+
+    let user = {};
+    if (sessionStorage.getItem("user")) {
+      user = JSON.parse(sessionStorage.getItem("user"));
+    }
+
+    axios.defaults.headers.common["Authorization"] = sessionStorage.getItem(
+      "jwtToken"
+    );
+    axios
+      .delete("/api/expenses/" + user.id, {
+        data: {
+          expense_id: id
+        }
+      })
+      .then(res => {
+        console.log(res.data)
+        if (this._isMounted && Array.isArray(res.data)) {
+          console.log(res.data.length);
+          this.setState({
+            expenses: res.data
+          });
+
+          window.dispatchEvent(new CustomEvent("expenses-changed"));
+          window.dispatchEvent(new CustomEvent("update-KeyMetricsChart"));
+        }
+      })
+      .catch(error => {
+        console.log("error", error);
+        if (error.response.status === 401) {
+          window.location.assign("/");
         }
       });
   };
@@ -90,16 +132,19 @@ class ExpensesComponent extends React.Component {
                       <th>Amount</th>
                       <th>Category</th>
                       <th>Frequency</th>
+                      <th>Remove</th>
                     </tr>
                   </thead>
                   {this.state.expenses.map((expense, index) => {
                     return (
                       <ExpenseComponent
                         key={index}
+                        id={expense._id}
                         name={expense.name}
                         category={expense.category}
                         value={expense.value}
                         frequency={expense.frequency}
+                        handleClick={this.handleClick}
                       />
                     );
                   })}

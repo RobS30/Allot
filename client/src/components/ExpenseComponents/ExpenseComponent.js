@@ -1,5 +1,7 @@
 import React from "react";
 import "./Expense.css";
+import { FaTrash } from "react-icons/fa";
+
 class ExpenseComponent extends React.Component {
   render() {
     return (
@@ -10,13 +12,9 @@ class ExpenseComponent extends React.Component {
             <td>{this.props.value}</td>
             <td>{this.props.category}</td>
             <td>{this.props.frequency}</td>
+            <td id={this.props.id} onClick={() => this.props.handleClick(this.props.id)} className="icon-style"><FaTrash /></td>
           </tr>
-        </tbody>
-        {/* <div className="col">{this.props.name}</div>
-          <div className="col">{this.props.value}</div>
-          <div className="col">{this.props.category}</div>
-          <div className="col">{this.props.frequency}</div>
-        </div> */}
+        </tbody>        
       </React.Fragment>
     );
   }

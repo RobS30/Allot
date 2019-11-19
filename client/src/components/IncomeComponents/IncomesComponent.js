@@ -41,7 +41,7 @@ class IncomesComponent extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    const { name, value, category, frequency } = e.target;
+    const { name, value, frequency } = e.target;
 
     let user = {};
     if (sessionStorage.getItem("user")) {
@@ -63,12 +63,53 @@ class IncomesComponent extends React.Component {
           this.setState({
             incomes: res.data
           });
+
+          window.dispatchEvent(new CustomEvent('incomes-changed'));
+          window.dispatchEvent(new CustomEvent('update-KeyMetricsChart'));
         }
       })
       .catch(error => {
         console.log("error", error);
         if (error.response.status === 401) {
-          this.props.history.push("/login");
+          window.location.assign("/");
+        }
+      });
+  };
+
+  // delete income
+  handleClick = id => {
+    console.log("delete income:", id);
+
+    let user = {};
+    if (sessionStorage.getItem("user")) {
+      user = JSON.parse(sessionStorage.getItem("user"));
+    }
+
+    axios.defaults.headers.common["Authorization"] = sessionStorage.getItem(
+      "jwtToken"
+    );
+    axios
+      .delete("/api/incomes/" + user.id, {
+        data: {
+          income_id: id
+        }
+      })
+      .then(res => {
+        console.log(res.data)
+        if (this._isMounted && Array.isArray(res.data)) {
+          console.log(res.data.length);
+          this.setState({
+            incomes: res.data
+          });
+
+          window.dispatchEvent(new CustomEvent("expenses-changed"));
+          window.dispatchEvent(new CustomEvent("update-KeyMetricsChart"));
+        }
+      })
+      .catch(error => {
+        console.log("error", error);
+        if (error.response.status === 401) {
+          window.location.assign("/");
         }
       });
   };
@@ -81,21 +122,24 @@ class IncomesComponent extends React.Component {
             <h2>Add Income</h2>
             <div>
               <div className="row">
-                <table>
+                <table className="income-table">
                   <thead>
                     <tr>
                       <th>Income</th>
                       <th>Amount</th>
                       <th>Frequency</th>
+                      <th>Remove</th>
                     </tr>
                   </thead>
                   {this.state.incomes.map((income, index) => {
                     return (
                       <IncomeComponent
                         key={index}
+                        id={income._id}
                         name={income.name}
                         value={income.value}
                         frequency={income.frequency}
+                        handleClick={this.handleClick}
                       />
                     );
                   })}
