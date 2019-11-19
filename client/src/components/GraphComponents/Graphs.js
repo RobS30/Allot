@@ -12,9 +12,7 @@ class GraphComponent extends React.Component {
     expenses: []
   };
 
-  componentDidMount() {
-    
-  }
+  componentDidMount() {}
 
   render() {
     return (
@@ -38,7 +36,7 @@ class GraphComponent extends React.Component {
               <AmortizationChart />
             </div>
           </div>
-        </div>
+        
       </>
     );
   }

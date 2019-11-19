@@ -114,6 +114,38 @@ class IncomesComponent extends React.Component {
       });
   };
 
+  handleClick = e => {
+    e.preventDefault();
+
+    const { name, value, frequency } = e.target;
+
+    let user = {};
+    if (sessionStorage.getItem("user")) {
+      user = JSON.parse(sessionStorage.getItem("user"));
+    }
+    
+    axios.defaults.headers.common["Authorization"] = sessionStorage.getItem(
+      "jwtToken"
+    );
+    axios
+      .delete("/api/incomes/" + user.id)
+      .then(res => {
+        if (this._isMounted && Array.isArray(res.data)) {
+          console.log(res.data.length);
+          this.setState({
+            incomes: res.data
+          });
+        }
+      })
+      .catch(error => {
+        console.log("error", error);
+        if (error.response.status === 401) {
+          window.location.assign("/");
+        }
+      });
+  };
+
+
   render() {
     return (
       <>

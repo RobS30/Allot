@@ -4,6 +4,7 @@ import "./keymetrics.css";
 
 import { emptyStatement } from "@babel/types";
 class KeyMetricsChart extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {

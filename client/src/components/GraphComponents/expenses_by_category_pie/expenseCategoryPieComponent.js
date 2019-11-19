@@ -28,6 +28,7 @@ class ExpenseCategoryPie extends React.Component {
       "jwtToken"
     );
 
+
     axios.get("/api/expensechart/" + user.id).then(res => {
       // this needs to be updated to pull categories along with the number of times they occur
       if (!res.data[1]) {
@@ -55,14 +56,15 @@ class ExpenseCategoryPie extends React.Component {
       }
     })
   }
+  
 
   render() {
     return (
       <div>
       {this.state.chartData.length > 0 ? (
         <Chart
-          width={"100%"}
-          height={"100%"}
+          width={'100%'}
+          height={'100%'}
           chartType="PieChart"
           loader={<div>Loading Chart</div>}
           data={this.state.chartData ? this.state.chartData : []}
