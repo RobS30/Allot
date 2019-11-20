@@ -43,8 +43,8 @@ class AmortizationChart extends React.Component {
     return (
       <div>
         <Chart
-          width={"600px"}
-          height={"300px"}
+          width={"920px"}
+          height={"380px"}
           chartType="LineChart"
           loader={<div>Loading Chart</div>}
           data={this.state.chartDtata}
@@ -54,23 +54,23 @@ class AmortizationChart extends React.Component {
             chartArea: { width: "50%" },
             legendTextStyle: {color: '#fff'},
             textStyle: { color: "white", fontsize: 40, bold: true },
+            lineWidth: 2,
             hAxis: {
+              //scaleType: 'log',
               title: "Months",
-              // minValue: 0,
-              // maxValue: 240,
+              minValue: 0,
+              //maxValue: 239,
               textStyle: { color: "#FFFFFF", fontsize: 20, bold: true },
               titleTextStyle: {color: '#fff', fontSize: 14}
             },
             vAxis: {
               title: "Balance",
-              // minValue: 0,
-              // maxValue: 50000,
+              minValue: 0,
+              //maxValue: 50000,
               titleTextStyle: {color: '#fff', fontSize: 14},
               textStyle: { color: "#FFFFFF", fontsize: 18, bold: true }
             },
-            series: {
-              1: { curveType: "function" }
-            },
+            
             legend: "none",
             // background color for payoff schedule goes here
             backgroundColor: "#181818"

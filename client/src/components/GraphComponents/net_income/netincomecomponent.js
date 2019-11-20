@@ -59,8 +59,8 @@ class NetIncomeBarComponent extends React.Component {
       <div>
       {this.state.chartData.length > 0 ? (
         <Chart
-          width={"600px"}
-          height={"300px"}
+          width={"900px"}
+          height={"380px"}
           chartType="BarChart"
           loader={<div>Loading Chart</div>}
           data={this.state.chartData ? this.state.chartData : []}
@@ -79,6 +79,7 @@ class NetIncomeBarComponent extends React.Component {
             chartArea: { width: "50%" },
             titleTextStyle: {color: '#fff', fontSize: 20},
             backgroundColor: "#181818",
+            bar: {groupWidth: '100%'},
             hAxis: {
               title: "Income",
               titleTextStyle: {color: '#fff'},

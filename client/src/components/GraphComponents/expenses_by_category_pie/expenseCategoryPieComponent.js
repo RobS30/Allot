@@ -77,7 +77,8 @@ class ExpenseCategoryPie extends React.Component {
           //   ['Sleep', 7],
           // // ]}
           options={{
-            // title: 'Expenses by Category',
+            title: 'Expenses by Category',
+            titleTextStyle: {color: '#fff', fontSize: 20},
             backgroundColor: { fill:'transparent' },
             legend: { textStyle: { color: "white", fontSize: 16 } },
             slices: {
