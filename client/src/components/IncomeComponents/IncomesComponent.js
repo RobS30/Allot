@@ -114,8 +114,9 @@ class IncomesComponent extends React.Component {
       });
   };
 
-  handleClick = e => {
-    e.preventDefault();
+  // delete income
+  handleClick = id => {
+    console.log("delete income:", id);
 
     const { name, value, frequency } = e.target;
 
@@ -123,12 +124,16 @@ class IncomesComponent extends React.Component {
     if (sessionStorage.getItem("user")) {
       user = JSON.parse(sessionStorage.getItem("user"));
     }
-    
+
     axios.defaults.headers.common["Authorization"] = sessionStorage.getItem(
       "jwtToken"
     );
     axios
-      .delete("/api/incomes/" + user.id)
+      .delete("/api/incomes/" + user.id, {
+        data: {
+          income_id: id
+        }
+      })
       .then(res => {
         if (this._isMounted && Array.isArray(res.data)) {
           console.log(res.data.length);

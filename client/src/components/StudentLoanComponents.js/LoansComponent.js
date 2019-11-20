@@ -38,26 +38,24 @@ class StudentLoansComponent extends React.Component {
     this._isMounted = false;
   }
 
-  handleSubmit = e => {
-    e.preventDefault();
-
-    const { name, value, interest } = e.target;
+  // delete loan
+  handleClick = id => {
+    console.log("delete studentLoan:", id);
 
     let user = {};
     if (sessionStorage.getItem("user")) {
       user = JSON.parse(sessionStorage.getItem("user"));
     }
-    const studentLoans = {
-      name: name.value,
-      value: value.value,
-      interest: interest.value,
-      id: user.id
-    };
+
     axios.defaults.headers.common["Authorization"] = sessionStorage.getItem(
       "jwtToken"
     );
     axios
-      .post("/api/studentLoans", studentLoans)
+      .delete("/api/studentLoans/" + user.id, {
+        data: {
+          income_id: id
+        }
+      })
       .then(res => {
         if (this._isMounted && Array.isArray(res.data)) {
           this.setState({
@@ -113,7 +111,7 @@ class StudentLoansComponent extends React.Component {
         }
       });
   };
-  
+
   render() {
     return (
       <>
