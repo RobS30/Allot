@@ -16,6 +16,7 @@ There is also an option to add a student loan. The infor provided with help set 
 
 # Demo:
 https://drive.google.com/open?id=1ibgYHkNJ2jyezI8q__8gSGyktbrOqsPM
+
 # Plan/Future:
 In the future we'd like to add some features to both the Student Loan Component and Graphs Available.
 
@@ -23,17 +24,16 @@ Giving the user the option to predict the earning potencial of the degree progra
 
 
 # Technologies Used:
-React.js
-MongoDB
-Express
-Javascript
-React Bootstrap
-React Google Charts
-Axios
-React Router
-Node
-Passport
-Custom Events
-bcrypt
-Mongoose
-
+React.js, 
+MongoDB, 
+Express, 
+Javascript, 
+React Bootstrap, 
+React Google Charts, 
+Axios, 
+React Router, 
+Node, 
+Passport, 
+Custom Events, 
+bcrypt, 
+Mongoose, 
