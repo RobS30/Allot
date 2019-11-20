@@ -39,7 +39,7 @@ class AmortizationChart extends React.Component {
 
   render() {
     //const initialState={{ chartEditor: null, chartWrapper: null, google: null }}
-    console.log('chartDtata', this.state.chartDtata.length)
+    console.log('chartDtata', this.state.chartDtata)
     return (
       <div>
         <Chart
@@ -47,7 +47,7 @@ class AmortizationChart extends React.Component {
           height={"100%"}
           chartType="LineChart"
           loader={<div>Loading Chart</div>}
-          data={this.state.chartData}
+          data={this.state.chartDtata}
           options={{
             title: "Loan Payoff Schedule",
             textStyle: { color: "white", fontsize: 40, bold: true },
