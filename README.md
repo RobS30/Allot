@@ -15,7 +15,7 @@ Like most applications that provide a service, you will need to sign up with som
 There is also an option to add a student loan. The infor provided with help set up student loan payoff schedule.
 
 # Demo:
-add link to video here
+https://drive.google.com/file/d/1SEwNR7c_i0sOcYXUPJqZ9xjYdSxvFEAw/view
 
 # Plan/Future:
 In the future we'd like to add some features to both the Student Loan Component and Graphs Available.
