@@ -36,7 +36,7 @@ class GraphComponent extends React.Component {
               <AmortizationChart />
             </div>
           </div>
-        
+        </div>
       </>
     );
   }
