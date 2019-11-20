@@ -63,8 +63,8 @@ class ExpenseCategoryPie extends React.Component {
       <div>
       {this.state.chartData.length > 0 ? (
         <Chart
-          width={'100%'}
-          height={'100%'}
+          width={'600px'}
+          height={'300px'}
           chartType="PieChart"
           loader={<div>Loading Chart</div>}
           data={this.state.chartData ? this.state.chartData : []}
@@ -78,7 +78,7 @@ class ExpenseCategoryPie extends React.Component {
           // // ]}
           options={{
             // title: 'Expenses by Category',
-            backgroundColor: "#181818",
+            backgroundColor: { fill:'transparent' },
             legend: { textStyle: { color: "white", fontSize: 16 } },
             slices: {
               0: { color: "#4D58FF" },

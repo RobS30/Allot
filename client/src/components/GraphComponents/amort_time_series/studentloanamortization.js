@@ -50,6 +50,7 @@ class AmortizationChart extends React.Component {
           data={this.state.chartDtata}
           options={{
             title: "Loan Payoff Schedule",
+            chartArea: { width: "50%" },
             textStyle: { color: "white", fontsize: 40, bold: true },
             hAxis: {
               title: "Months",
