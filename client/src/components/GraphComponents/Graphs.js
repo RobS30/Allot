@@ -19,7 +19,7 @@ class GraphComponent extends React.Component {
       <>
         <div className="graphs-display mb-2">
           <div className="row">
-            <div className="col-lg-3 mr-4 graph-components d-flex justify-content-center">
+            <div className="col-lg-3 graph-components d-flex justify-content-center">
               <KeyMetricsChart />
             </div>
             <div className="col-lg-8 graph-components d-flex justify-content-center">
@@ -27,12 +27,12 @@ class GraphComponent extends React.Component {
             </div>
           </div>
           <div className="row">
-            <div className="col-lg-11 mt-4 graph-components d-flex justify-content-center">
+            <div className="col-lg-11 mt-4 mr-2 graph-components d-flex justify-content-center">
               <NetIncomeBarComponent />
             </div>
           </div>
           <div className="row">
-            <div className="col-lg-11 mt-4 graph-components d-flex justify-content-center mb-4">
+            <div className="col-lg-11 mt-4 mr-2 graph-components d-flex justify-content-center mb-4">
               <AmortizationChart />
             </div>
           </div>
