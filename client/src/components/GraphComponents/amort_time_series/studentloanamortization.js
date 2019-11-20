@@ -43,25 +43,29 @@ class AmortizationChart extends React.Component {
     return (
       <div>
         <Chart
-          width={"100%"}
-          height={"100%"}
+          width={"600px"}
+          height={"300px"}
           chartType="LineChart"
           loader={<div>Loading Chart</div>}
           data={this.state.chartDtata}
           options={{
             title: "Loan Payoff Schedule",
+            titleTextStyle: {color: '#fff', fontSize: 20},
             chartArea: { width: "50%" },
+            legendTextStyle: {color: '#fff'},
             textStyle: { color: "white", fontsize: 40, bold: true },
             hAxis: {
               title: "Months",
               // minValue: 0,
               // maxValue: 240,
-              textStyle: { color: "#FFFFFF", fontsize: 20, bold: true }
+              textStyle: { color: "#FFFFFF", fontsize: 20, bold: true },
+              titleTextStyle: {color: '#fff', fontSize: 14}
             },
             vAxis: {
               title: "Balance",
               // minValue: 0,
               // maxValue: 50000,
+              titleTextStyle: {color: '#fff', fontSize: 14},
               textStyle: { color: "#FFFFFF", fontsize: 18, bold: true }
             },
             series: {
