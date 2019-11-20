@@ -74,17 +74,22 @@ class NetIncomeBarComponent extends React.Component {
           // }
           options={{
             title: "Monthly Cash Flow",
-            titleStyle:{color: '#fff'},
-            labelStyle:{color: '#fff'},
+            textStyle:{color: '#fff'},
+            legendTextStyle: {color: '#fff'},
             chartArea: { width: "50%" },
+            titleTextStyle: {color: '#fff', fontSize: 20},
             backgroundColor: "#181818",
             hAxis: {
               title: "Income",
+              titleTextStyle: {color: '#fff'},
+              titleTextStyle: {color: '#fff', fontSize: 14},
               minValue: 0,
               textStyle:{color: '#fff'}
             },
             vAxis: {
               title: "Expenses",
+              titleTextStyle: {color: '#fff'},
+              titleTextStyle: {color: '#fff', fontSize: 14},
               textStyle:{color: '#fff'}
             }
           }}
