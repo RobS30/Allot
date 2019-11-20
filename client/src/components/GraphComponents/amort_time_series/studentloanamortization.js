@@ -39,17 +39,15 @@ class AmortizationChart extends React.Component {
 
   render() {
     //const initialState={{ chartEditor: null, chartWrapper: null, google: null }}
-
+    console.log('chartDtata', this.state.chartDtata)
     return (
       <div>
-        {this.state.chartDtata.length > 0 ? (
-
         <Chart
           width={"100%"}
           height={"100%"}
           chartType="LineChart"
           loader={<div>Loading Chart</div>}
-          data={this.state.chartData ? this.state.chartData : []}
+          data={this.state.chartDtata}
           options={{
             title: "Loan Payoff Schedule",
             textStyle: { color: "white", fontsize: 40, bold: true },
@@ -80,9 +78,7 @@ class AmortizationChart extends React.Component {
           // }}
           // chartPackages={["corechart", "controls", "charteditor"]}
         />
-        ) : (
-          <div></div>
-        )}
+        
       </div>
     );
   }
