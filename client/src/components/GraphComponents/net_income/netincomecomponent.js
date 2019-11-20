@@ -59,8 +59,8 @@ class NetIncomeBarComponent extends React.Component {
       <div>
       {this.state.chartData.length > 0 ? (
         <Chart
-          width={"100%"}
-          height={"100%"}
+          width={"600px"}
+          height={"300px"}
           chartType="BarChart"
           loader={<div>Loading Chart</div>}
           data={this.state.chartData ? this.state.chartData : []}
@@ -74,13 +74,23 @@ class NetIncomeBarComponent extends React.Component {
           // }
           options={{
             title: "Monthly Cash Flow",
-            chartArea: { width: "100%" },
+            textStyle:{color: '#fff'},
+            legendTextStyle: {color: '#fff'},
+            chartArea: { width: "50%" },
+            titleTextStyle: {color: '#fff', fontSize: 20},
+            backgroundColor: "#181818",
             hAxis: {
               title: "Income",
-              minValue: 0
+              titleTextStyle: {color: '#fff'},
+              titleTextStyle: {color: '#fff', fontSize: 14},
+              minValue: 0,
+              textStyle:{color: '#fff'}
             },
             vAxis: {
-              title: "Expenses"
+              title: "Expenses",
+              titleTextStyle: {color: '#fff'},
+              titleTextStyle: {color: '#fff', fontSize: 14},
+              textStyle:{color: '#fff'}
             }
           }}
           // For tests
