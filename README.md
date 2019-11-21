@@ -10,12 +10,12 @@ Is to provide an app that keeps track of all income and expenses. Making peopleâ
 # Process:
 Like most applications that provide a service, you will need to sign up with some personal information. The current beta version requires simple user data such as Name, School Attending and login information (Email, Password).
 
-# As a user you will be able to input all expenses and income. (Oil Change, Food, Part-Time, Gas ETC.).Dashboard components with graphs generated from combination of User Input and Static Data pulled into the database.
+As a user you will be able to input all expenses and income. (Oil Change, Food, Part-Time, Gas ETC.).Dashboard components with graphs generated from combination of User Input and Static Data pulled into the database.
 
 There is also an option to add a student loan. The infor provided with help set up student loan payoff schedule.
 
 # Demo:
-add link to video here
+https://drive.google.com/open?id=1ibgYHkNJ2jyezI8q__8gSGyktbrOqsPM
 
 # Plan/Future:
 In the future we'd like to add some features to both the Student Loan Component and Graphs Available.
@@ -24,18 +24,16 @@ Giving the user the option to predict the earning potencial of the degree progra
 
 
 # Technologies Used:
-
-React.js
-MongoDB
-Express
-Javascript
-React Bootstrap
-React Google Charts
-Axios
-React Router
-Node
-Passport
-Custom Events
-bcrypt
-Mongoose
-
+React.js, 
+MongoDB, 
+Express, 
+Javascript, 
+React Bootstrap, 
+React Google Charts, 
+Axios, 
+React Router, 
+Node, 
+Passport, 
+Custom Events, 
+bcrypt, 
+Mongoose, 
