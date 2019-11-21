@@ -61,10 +61,10 @@ class StudentLoansComponent extends React.Component {
           this.setState({
             studentLoans: res.data
           });
-
+          
           window.dispatchEvent(new CustomEvent("expenses-changed"));
-          window.dispatchEvent(new CustomEvent("update-KeyMetricsChart"));
           window.dispatchEvent(new CustomEvent("loans-changed"));
+          window.dispatchEvent(new CustomEvent("update-KeyMetricsChart"));
         }
       })
       .catch(error => {
@@ -102,6 +102,7 @@ class StudentLoansComponent extends React.Component {
           });
 
           window.dispatchEvent(new CustomEvent("expenses-changed"));
+          window.dispatchEvent(new CustomEvent("loans-changed"));
           window.dispatchEvent(new CustomEvent("update-KeyMetricsChart"));
         }
       })

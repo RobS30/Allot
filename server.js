@@ -10,7 +10,7 @@ const mongoose = require('mongoose');
 const app = express();
 
 mongoose.Promise = require('bluebird');
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://user_allot:Secret123@ds225902.mlab.com:25902/heroku_nqvnz2h3', { promiseLibrary: require('bluebird') })
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://user_allot:Secret123@ds037468.mlab.com:37468/heroku_482w6xfq', { promiseLibrary: require('bluebird') })
   .then(() =>  console.log('connection succesful'))
   .catch((err) => console.error(err));
 
@@ -43,7 +43,8 @@ app.use(function(err, req, res, next) {
   
   // render the error page
   res.status(err.status || 500);
-  res.send({'message' : 'error' });
+  //res.send({'message' : 'error' });
+  res.redirect("/");
 });
 
 // Send every other request to the React app

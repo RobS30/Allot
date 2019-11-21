@@ -102,6 +102,7 @@ class IncomesComponent extends React.Component {
             incomes: res.data
           });
 
+          window.dispatchEvent(new CustomEvent("incomes-changed"));
           window.dispatchEvent(new CustomEvent("expenses-changed"));
           window.dispatchEvent(new CustomEvent("update-KeyMetricsChart"));
         }

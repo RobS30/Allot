@@ -1,5 +1,3 @@
-'use strict';
-
 var money = require('./money');
 
 function Mortgage(amount, interest, years) {

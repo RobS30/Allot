@@ -2,7 +2,6 @@ import React from "react";
 import axios from "axios";
 import "./keymetrics.css";
 
-import { emptyStatement } from "@babel/types";
 class KeyMetricsChart extends React.Component {
 
   constructor(props) {

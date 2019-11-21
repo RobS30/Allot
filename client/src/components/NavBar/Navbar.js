@@ -1,13 +1,17 @@
 import React, { Component } from "react";
 import { Navbar } from "react-bootstrap";
-import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./navbar.css";
 
 class Nav extends Component {
-  state = {
-    user: {}
-  };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: {}
+    };
+  }
+
 
   componentDidMount() {
     let user = {};
@@ -22,7 +26,7 @@ class Nav extends Component {
   logout = () => {
     sessionStorage.removeItem("jwtToken");
     sessionStorage.removeItem("user");
-    window.location.assign("/login");
+    window.location.reload();
   };
 
   login = () => {
