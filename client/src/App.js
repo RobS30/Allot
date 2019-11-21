@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 import "./App.css";
 import MainDisplay from "./components/MainDisplay";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -28,9 +27,9 @@ class App extends Component {
   }
 
   logout = () => {
+    window.location.assign("/");
     sessionStorage.removeItem("jwtToken");
     sessionStorage.removeItem("user");
-    window.location.reload();
   };
 
   login = () => {

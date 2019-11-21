@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import "./graphs.css";
 import AmortizationChart from "./amort_time_series/studentloanamortization";
 import KeyMetricsChart from "./key_metrics/keyMetricsComponent";

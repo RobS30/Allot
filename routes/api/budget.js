@@ -3,7 +3,7 @@ const passport = require("passport");
 const User = require("../../models/User");
 const Expense = require("../../models/Expense");
 const Income = require("../../models/Income");
-const StudentLoans = require("../../models/StudentLoans");
+const StudentLoans = require("../../models/Studentloans.js");
 require("../../config/passport")(passport);
 const Mortgage = require("../../client/src/components/GraphComponents/amort_time_series/loanamortization/mortgage");
 
@@ -267,15 +267,15 @@ module.exports = function(app) {
     "/api/expenses/:id",
     passport.authenticate("jwt", { session: false }),
     function(req, res) {
-      console.log(
-        "delete expese " + req.body.expense_id + " for user id " + req.params.id
-      );
+      // console.log(
+      //   "delete expese " + req.body.expense_id + " for user id " + req.params.id
+      //);
       let token = getToken(req.headers);
       if (token) {
         Expense.findByIdAndRemove(
           { _id: req.body.expense_id },
           (err, dbExpenses) => {
-            console.log("removed expense:", dbExpenses);
+            //console.log("removed expense:", dbExpenses);
             User.findOneAndUpdate(
               { _id: req.params.id },
               { $pull: { expenses: req.body.expense_id } },
@@ -384,15 +384,15 @@ module.exports = function(app) {
     "/api/incomes/:id",
     passport.authenticate("jwt", { session: false }),
     function(req, res) {
-      console.log(
-        "delete income " + req.body.income_id + " for user id " + req.params.id
-      );
+      // console.log(
+      //   "delete income " + req.body.income_id + " for user id " + req.params.id
+      //);
       let token = getToken(req.headers);
       if (token) {
         Income.findByIdAndRemove(
           { _id: req.body.income_id },
           (err, dbIncomes) => {
-            console.log("removed income:", dbIncomes);
+            //console.log("removed income:", dbIncomes);
           }
         );
 
@@ -479,7 +479,7 @@ module.exports = function(app) {
               //console.log(temp)
               temp2.push(temp);
             }
-            //console.log("temp2", temp2.length);
+            console.log("temp2", temp2.length);
             res.json(temp2);
           })
           .catch(function(err) {
@@ -545,12 +545,12 @@ module.exports = function(app) {
     "/api/studentLoans/:id",
     passport.authenticate("jwt", { session: false }),
     function(req, res) {
-      console.log(
-        "delete studentLoan " +
-          req.body.studentLoan_id +
-          " for user id " +
-          req.params.id
-      );
+      // console.log(
+      //   "delete studentLoan " +
+      //     req.body.studentLoan_id +
+      //     " for user id " +
+      //     req.params.id
+      //);
       let token = getToken(req.headers);
       if (token) {
         StudentLoans.findByIdAndRemove(

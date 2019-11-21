@@ -55,6 +55,7 @@ class NetIncomeBarComponent extends React.Component {
   }
 
   render() {
+    console.log('netcomponentincome',this.state.chartData.length)
     return (
       <div>
       {this.state.chartData.length > 0 ? (
@@ -82,14 +83,12 @@ class NetIncomeBarComponent extends React.Component {
             bar: {groupWidth: '100%'},
             hAxis: {
               title: "Income",
-              titleTextStyle: {color: '#fff'},
               titleTextStyle: {color: '#fff', fontSize: 14},
               minValue: 0,
               textStyle:{color: '#fff'}
             },
             vAxis: {
-              title: "Expenses",
-              titleTextStyle: {color: '#fff'},
+              title: "Expenses",              
               titleTextStyle: {color: '#fff', fontSize: 14},
               textStyle:{color: '#fff'}
             }

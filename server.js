@@ -43,7 +43,8 @@ app.use(function(err, req, res, next) {
   
   // render the error page
   res.status(err.status || 500);
-  res.send({'message' : 'error' });
+  //res.send({'message' : 'error' });
+  res.redirect("/");
 });
 
 // Send every other request to the React app

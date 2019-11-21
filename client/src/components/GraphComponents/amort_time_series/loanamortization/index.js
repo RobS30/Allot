@@ -1,7 +1,3 @@
-"use strict";
-
-import { Module } from "module";
-
 var Mortgage = require("./mortgage");
 
 // var amount = 30000;

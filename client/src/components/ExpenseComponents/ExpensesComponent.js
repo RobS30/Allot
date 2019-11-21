@@ -67,7 +67,6 @@ class ExpensesComponent extends React.Component {
 
           window.dispatchEvent(new CustomEvent("expenses-changed"));
           window.dispatchEvent(new CustomEvent("update-KeyMetricsChart"));
-          window.dispatchEvent(new CustomEvent("incomes-changed"));
           console.log(res.data.length);
         }
       })
