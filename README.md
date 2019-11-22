@@ -22,6 +22,8 @@ In the future we'd like to add some features to both the Student Loan Component 
 
 Giving the user the option to predict the earning potencial of the degree program selected and create a timeline of how long it will take to payoff once program of study is complete.
 
+# Heroku App
+https://evening-fjord-91238.herokuapp.com/
 
 # Technologies Used:
 React.js, 
